@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ROYAL WUNDERKIND MODEL SCHOOL - CRS EXAM 2025/2026</title>
+  <title>ROYAL WUNDERKIND MODEL SCHOOL - TERM TWO EXAM 2025/2026</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -78,15 +78,15 @@
   <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
   <h2>TERM TWO EXAMINATION, 2025/2026 ACADEMIC SESSION</h2>
   <p style="text-align:center; font-size:1.1em;">
-    Class: Key Stage 1 (Year 2)<br>
-    Subject: CHRISTIAN RELIGIOUS STUDIES<br>
-    Duration: 45 minutes (CBT version)
+    Class: Key Stage 1 (Year 1)<br>
+    Subject: CULTURAL AND CREATIVE ART<br>
+    Duration: 45 minutes (for this CBT version)
   </p>
   <div class="timer" id="timer">Time remaining: 45:00</div>
 </div>
 
 <form id="examForm">
-  <!-- Questions inserted by JS -->
+  <!-- Questions will be inserted here by JS -->
 </form>
 
 <button id="submitBtn">Submit Exam</button>
@@ -98,74 +98,78 @@
 </div>
 
 <script>
-// Correct answers array (letter only: A/B/C)
+// ────────────────────────────────────────────────
+//          CORRECT ANSWERS (used for scoring & reveal)
+// ────────────────────────────────────────────────
 const correctAnswers = [
-  "B", // 1. brother     (Jesus is our brother – common teaching: we are joint-heirs)
-  "B", // 2. God
-  "B", // 3. believe
-  "C", // 4. home
-  "A", // 5. washing plates
-  "B", // 6. save
-  "A", // 7. do wrong
-  "A", // 8. shelter
-  "B", // 9. like
-  "B", //10. friend
-  "B", //11. twelve
-  "A", //12. Matthew    (one of the twelve apostles)
-  "B", //13. love
-  "B", //14. David      (Jonathan and David were close friends)
-  "A", //15. Lazarus
-  "B", //16. wept       (John 11:35 – Jesus wept)
-  "B", //17. kind
-  "C", //18. truth
-  "B", //19. fish       (feeding of the 5,000 – five loaves and two fish)
-  "A", //20. God
-  "B", //21. doing
-  "B", //22. God
-  "B", //23. Adam
-  "C", //24. Eve
-  "B", //25. Samuel
-  "B", //26. Joseph and Mary
-  "B", //27. protected
-  "B", //28. wisdom     (Luke 2:52 – grew in wisdom)
-  "A", //29. obey
-  "B"  //30. love
+  "B", // 1. shapes
+  "B", // 2. circle
+  "B", // 3. four
+  "B", // 4. three
+  "A", // 5. colours
+  "B", // 6. life
+  "B", // 7. inanimate
+  "B", // 8. drawing
+  "A", // 9. grow
+  "B", //10. neat
+  "B", //11. paper
+  "B", //12. paper
+  "B", //13. folding
+  "A", //14. glue
+  "A", //15. decoration
+  "B", //16. short
+  "B", //17. remember
+  "B", //18. rhyme
+  "B", //19. properly
+  "B", //20. interesting
+  "B", //21. acting
+  "B", //22. creative
+  "A", //23. entertain
+  "B", //24. monkey   (assuming Mr Pablo is monkey – common in such stories)
+  "B", //25. Sulan     (assuming Sulan is king – please adjust if different)
+  "B", //26. dance
+  "B", //27. music
+  "B", //28. ceremony
+  "B", //29. cheerful
+  "B"  //30. together
 ];
 
 const questions = [
-  { q: "1. Jesus is our _______.", opts: ["A. father", "B. brother", "C. uncle"] },
-  { q: "2. Jesus is the Son of _______.", opts: ["A. man", "B. God", "C. angel"] },
-  { q: "3. We become children of God when we _______ in Jesus.", opts: ["A. sleep", "B. believe", "C. play"] },
-  { q: "4. Brothers and sisters help one another at _______.", opts: ["A. school", "B. market", "C. home"] },
-  { q: "5. One duty we do at home is _______.", opts: ["A. washing plates", "B. driving cars", "C. flying planes"] },
-  { q: "6. Jesus gave His life to _______ us.", opts: ["A. punish", "B. save", "C. chase"] },
-  { q: "7. Jesus forgives us when we _______.", opts: ["A. do wrong", "B. eat food", "C. play games"] },
-  { q: "8. Jesus gives us food, clothes and _______.", opts: ["A. shelter", "B. toys", "C. bags"] },
-  { q: "9. A friend is someone you ______ very much.", opts: ["A. hate", "B. like", "C. fear"] },
-  { q: "10. Jesus is our ______.", opts: ["A. enemy", "B. friend", "C. fighter"] },
-  { q: "11. Jesus had ______ apostles.", opts: ["A. ten", "B. twelve", "C. twenty"] },
-  { q: "12. One of Jesus’ apostles was ______.", opts: ["A. Matthew", "B. Moses", "C. Elijah"] },
-  { q: "13. Jesus wants us to ______ one another.", opts: ["A. hate", "B. love", "C. push"] },
-  { q: "14. Jonathan was a friend of ______.", opts: ["A. Moses", "B. David", "C. Peter"] },
-  { q: "15. Jesus had a friend called ______.", opts: ["A. Lazarus", "B. Pharaoh", "C. Herod"] },
-  { q: "16. When Lazarus died, Jesus ______.", opts: ["A. laughed", "B. wept", "C. ran away"] },
-  { q: "17. Love means being ______.", opts: ["A. wicked", "B. kind", "C. proud"] },
-  { q: "18. A good friend tells the ______.", opts: ["A. lie", "B. story", "C. truth"] },
-  { q: "19. The little boy shared five loaves and two ______.", opts: ["A. apples", "B. fish", "C. eggs"] },
-  { q: "20. Jesus thanked ______ before sharing the food.", opts: ["A. God", "B. people", "C. angels"] },
-  { q: "21. Obedience means ______ what you are told.", opts: ["A. ignoring", "B. doing", "C. refusing"] },
-  { q: "22. Jesus obeyed ______.", opts: ["A. Satan", "B. God", "C. soldiers"] },
-  { q: "23. The first man God created was ______.", opts: ["A. Abraham", "B. Adam", "C. Samuel"] },
-  { q: "24. The first woman God created was ______.", opts: ["A. Ruth", "B. Mary", "C. Eve"] },
-  { q: "25. Hannah’s son was called ______.", opts: ["A. David", "B. Samuel", "C. Joseph"] },
-  { q: "26. Jesus’ parents are ______.", opts: ["A. Peter and John", "B. Joseph and Mary", "C. Simeon and Anna"] },
-  { q: "27. God ______ Jesus.", opts: ["A. forgot", "B. protected", "C. left"] },
-  { q: "28. Jesus grew in ______.", opts: ["A. anger", "B. wisdom", "C. fighting"] },
-  { q: "29. Jesus wants us to ______ God.", opts: ["A. obey", "B. fight", "C. ignore"] },
-  { q: "30. We should ______ others.", opts: ["A. hate", "B. love", "C. push"] }
+  { q: "1. A pattern is made by repeating ______.", opts: ["A. letters", "B. shapes", "C. words"] },
+  { q: "2. Which of these is a basic shape?", opts: ["A. book", "B. circle", "C. chair"] },
+  { q: "3. A square has ______ equal sides.", opts: ["A. three", "B. four", "C. five"] },
+  { q: "4. A triangle has ______ sides.", opts: ["A. two", "B. three", "C. four"] },
+  { q: "5. Patterns look more beautiful when we use ______. ", opts: ["A. colours", "B. noise", "C. dust"] },
+  { q: "6. An inanimate object is something that has no ______. ", opts: ["A. colour", "B. life", "C. shape"] },
+  { q: "7. A chair is an example of an ______ object.", opts: ["A. animate", "B. inanimate", "C. living"] },
+  { q: "8. A pencil is used for ______. ", opts: ["A. cooking", "B. drawing", "C. washing"] },
+  { q: "9. A book cannot ______. ", opts: ["A. grow", "B. open", "C. close"] },
+  { q: "10. In drawing we should be ______. ", opts: ["A. rough", "B. neat", "C. careless"] },
+  { q: "11. Paper craft means making things from ______. ", opts: ["A. wood", "B. paper", "C. metal"] },
+  { q: "12. A kite is made from ______. ", opts: ["A. plastic", "B. paper", "C. iron"] },
+  { q: "13. A paper fan is made by ______. ", opts: ["A. tearing", "B. folding", "C. burning"] },
+  { q: "14. We use ______ to join paper. ", opts: ["A. glue", "B. sand", "C. dust"] },
+  { q: "15. Paper crafts can be used for ______. ", opts: ["A. decoration", "B. fighting", "C. cooking"] },
+  { q: "16. Rhymes are ______ songs. ", opts: ["A. long", "B. short", "C. difficult"] },
+  { q: "17. Rhymes are easy to ______. ", opts: ["A. forget", "B. remember", "C. break"] },
+  { q: "18. “Baa Baa Black Sheep” is a ______. ", opts: ["A. story", "B. rhyme", "C. play"] },
+  { q: "19. Rhymes help us pronounce words ______. ", opts: ["A. wrongly", "B. properly", "C. slowly"] },
+  { q: "20. Rhymes are ______ to sing. ", opts: ["A. boring", "B. interesting", "C. silent"] },
+  { q: "21. Role-play means ______ a part in a story. ", opts: ["A. reading", "B. acting", "C. drawing"] },
+  { q: "22. Role-play helps us to be ______. ", opts: ["A. lazy", "B. creative", "C. careless"] },
+  { q: "23. Stories are told to ______ us. ", opts: ["A. entertain", "B. fight", "C. confuse"] },
+  { q: "24. Mr Pablo in the story was a ______. ", opts: ["A. lion", "B. monkey", "C. goat"] },
+  { q: "25. The king of the animals was ______. ", opts: ["A. Pablo", "B. Sulan", "C. Thompson"] },
+  { q: "26. During ceremonies people ______. ", opts: ["A. sleep", "B. dance", "C. hide"] },
+  { q: "27. Drums are used to make ______. ", opts: ["A. noise", "B. music", "C. water"] },
+  { q: "28. A wedding is a type of ______. ", opts: ["A. game", "B. ceremony", "C. lesson"] },
+  { q: "29. People are usually ______ during ceremonies. ", opts: ["A. sad", "B. cheerful", "C. angry"] },
+  { q: "30. Ceremonies bring people ______. ", opts: ["A. apart", "B. together", "C. away"] }
 ];
 
-// Render questions
+// ────────────────────────────────────────────────
+//               RENDER QUESTIONS
+// ────────────────────────────────────────────────
 const form = document.getElementById("examForm");
 
 questions.forEach((item, index) => {
@@ -174,7 +178,7 @@ questions.forEach((item, index) => {
   div.innerHTML = `<h3>${item.q}</h3>`;
 
   item.opts.forEach((opt, i) => {
-    const letter = String.fromCharCode(65 + i);
+    const letter = String.fromCharCode(65 + i); // A,B,C,...
     const id = `q${index+1}_${letter}`;
     const row = document.createElement("div");
     row.className = "option-row";
@@ -188,8 +192,10 @@ questions.forEach((item, index) => {
   form.appendChild(div);
 });
 
-// Timer: 45 minutes
-let timeLeft = 45 * 60;
+// ────────────────────────────────────────────────
+//                  TIMER (45 minutes)
+// ────────────────────────────────────────────────
+let timeLeft = 45 * 60; // seconds
 const timerDisplay = document.getElementById("timer");
 let timerInterval;
 
@@ -201,15 +207,17 @@ function updateTimer() {
   if (timeLeft <= 0) {
     clearInterval(timerInterval);
     timerDisplay.textContent = "Time's up!";
-    submitExam();
+    submitExam(); // auto-submit
   }
   timeLeft--;
 }
 
 timerInterval = setInterval(updateTimer, 1000);
-updateTimer();
+updateTimer(); // initial call
 
-// Submit logic
+// ────────────────────────────────────────────────
+//                 SUBMIT & SCORING
+// ────────────────────────────────────────────────
 document.getElementById("submitBtn").addEventListener("click", submitExam);
 
 function submitExam() {
@@ -219,34 +227,44 @@ function submitExam() {
   let score = 0;
   let html = "";
 
-  questions.forEach((qItem, i) => {
+  questions.forEach((_, i) => {
     const qNum = i + 1;
     const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
     const userAns = selected ? selected.value : null;
     const correct = correctAnswers[i];
 
-    let mark = userAns === correct
-      ? `<span class="correct">✅ Correct</span>`
-      : `<span class="wrong">❌ Wrong</span>`;
+    let status = "";
+    let mark = "";
 
-    const correctIdx = correct.charCodeAt(0) - 65;
-    const correctText = qItem.opts[correctIdx].substring(3).trim();
+    if (userAns === correct) {
+      score++;
+      mark = `<span class="correct">✅ Correct</span>`;
+    } else {
+      mark = `<span class="wrong">❌ Wrong</span>`;
+    }
+
+    // Show correct answer always after submission
+    const correctLetter = correct;
+    const correctText = questions[i].opts[correct.charCodeAt(0) - 65].substring(3); // remove "A. "
 
     html += `
       <div class="question">
-        <h3>${qItem.q}</h3>
+        <h3>${questions[i].q}</h3>
         <p>Your answer: ${userAns || "—"} ${mark}</p>
-        <p>Correct answer: <span class="revealed-correct">${correct}. ${correctText}</span></p>
+        <p>Correct answer: <span class="revealed-correct">${correctLetter}. ${correctText}</span></p>
       </div>
     `;
-
-    if (userAns === correct) score++;
   });
 
   const percent = ((score / 30) * 100).toFixed(1);
-  document.getElementById("scoreText").innerHTML = `You scored <strong>${score} / 30</strong> (${percent}%)`;
+
+  document.getElementById("scoreText").innerHTML =
+    `You scored <strong>${score} / 30</strong> (${percent}%)`;
+
   document.getElementById("detailedAnswers").innerHTML = html;
   document.getElementById("result").style.display = "block";
+
+  // Scroll to result
   document.getElementById("result").scrollIntoView({ behavior: "smooth" });
 }
 </script>
