@@ -3,231 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBT Examination</title>
+    <title>ROYAL WUNDERKIND MODEL SCHOOL - YEAR 7 CBT</title>
     <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #34495e;
-            --accent: #3498db;
-            --success: #27ae60;
-            --danger: #e74c3c;
-            --light: #f4f7f6;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 0;
         }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        /* LOGIN SYSTEM */
+        #loginOverlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0a2a66;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            max-width: 450px;
+            width: 90%;
+        }
+        .login-box h2 { color: #0a2a66; margin-top: 0; }
+        .login-box input {
+            padding: 12px;
+            width: 85%;
+            margin: 20px 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        /* HEADER */
+        .header-section {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #0a2a66;
+        }
+        .header-section h1 { color: #0a2a66; margin: 0; font-size: 24px; }
+        .header-section h2 { color: #d35400; margin: 5px 0; font-size: 18px; }
+
+        /* STICKY STATUS BAR */
+        .status-bar {
+            position: sticky;
+            top: 0;
+            background: #0a2a66;
+            color: white;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .timer-box {
+            background: #e74c3c;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* CONTENT */
+        .container {
+            max-width: 850px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .intro-text {
+            border-left: 5px solid #0a2a66;
+            padding-left: 15px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .q-card {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .q-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; }
         
-        #login-section, #result-section { text-align: center; }
-        .hidden { display: none; }
+        .opt-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .opt-label {
+            background: #f9f9f9;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .opt-label:hover { background: #eef2f7; border-color: #0a2a66; }
+        .opt-label input { margin-right: 10px; }
 
-        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--light); padding-bottom: 10px; margin-bottom: 20px; }
-        #timer { font-size: 1.2rem; font-weight: bold; color: var(--danger); }
-        
-        .question-container { display: none; }
-        .question-container.active { display: block; }
-        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; }
-        
-        .options-list { list-style: none; padding: 0; }
-        .option { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: 0.2s; }
-        .option:hover { background: #f0f0f0; }
-        .option input { margin-right: 10px; }
+        /* FEEDBACK STYLES */
+        .correct-pick { background: #d4edda !important; border-color: #28a745 !important; }
+        .wrong-pick { background: #f8d7da !important; border-color: #dc3545 !important; }
+        .feedback-msg { margin-top: 10px; font-weight: bold; font-size: 14px; }
+        .text-success { color: #28a745; }
+        .text-danger { color: #dc3545; }
 
-        .text-input { width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .submit-area { text-align: center; margin-top: 40px; }
+        #finalSubmit {
+            background: #27ae60;
+            color: white;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #finalSubmit:hover { background: #219150; }
 
-        .navigation { margin-top: 30px; display: flex; justify-content: space-between; }
-        button { padding: 10px 25px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-next { background: var(--accent); color: white; }
-        .btn-prev { background: var(--secondary); color: white; }
-        .btn-submit { background: var(--success); color: white; }
-        button:disabled { background: #ccc; cursor: not-allowed; }
-
-        .review-item { border-bottom: 1px solid #eee; padding: 15px 0; text-align: left; }
-        .correct-ans { color: var(--success); font-weight: bold; }
-        .user-ans { font-style: italic; }
+        #resultsArea {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #0a2a66;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="login-section">
-        <h1>Royal Wunderkind Model School</h1>
-        <h2>Subject: English Language | Year 1</h2>
-        <p>Please enter your full name to begin the assessment.</p>
-        <input type="text" id="candidate-name" placeholder="Full Name" style="padding:10px; width:250px; margin-bottom:20px;"><br>
-        <button class="btn-next" onclick="startExam()">Start Examination</button>
-    </div>
-
-    <div id="exam-section" class="hidden">
-        <header>
-            <div id="display-name">Candidate: </div>
-            <div id="timer">Time Remaining: 45:00</div>
-        </header>
-
-        <div id="questions-wrapper">
-            </div>
-
-        <div class="navigation">
-            <button id="prev-btn" class="btn-prev" onclick="changeQuestion(-1)">Previous</button>
-            <button id="next-btn" class="btn-next" onclick="changeQuestion(1)">Next</button>
-            <button id="submit-btn" class="btn-submit hidden" onclick="endExam()">Submit Exam</button>
+    <div id="loginOverlay">
+        <div class="login-box">
+            <img src="https://via.placeholder.com/80/0a2a66/ffffff?text=RWMS" alt="Logo" style="border-radius: 50%; margin-bottom: 15px;">
+            <h2>RWMS EXAMINATION PORTAL</h2>
+            <p><strong>Subject:</strong> Purpose-Driven Life (Rick Warren)<br><strong>Class:</strong> Year 7</p>
+            <input type="text" id="studentName" placeholder="Enter Full Name">
+            <button onclick="startExam()" style="background:#2ecc71; color:white; padding:12px 30px; border:none; border-radius:5px; cursor:pointer; width:90%; font-size:16px; font-weight:bold;">ACCESS EXAMINATION</button>
         </div>
     </div>
 
-    <div id="result-section" class="hidden">
-        <h2>Examination Result</h2>
-        <h3 id="final-score"></h3>
-        <hr>
-        <div id="answer-review"></div>
-        <button class="btn-next" style="margin-top:20px;" onclick="location.reload()">Restart</button>
+    <div class="header-section">
+        <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
+        <h2>TERM 2 EXAMINATION – 2025/2026 SESSION</h2>
     </div>
-</div>
+
+    <div class="status-bar">
+        <div><strong>Student:</strong> <span id="displayName">---</span></div>
+        <div class="timer-box">Time: <span id="time">45:00</span></div>
+    </div>
+
+    <div class="container" id="mainExamBody">
+        <div id="resultsArea">
+            <h2 style="color:#0a2a66; margin:0;">Examination Completed</h2>
+            <div id="scoreDisplay" style="font-size: 40px; margin: 10px 0; color: #27ae60; font-weight: bold;"></div>
+            <p>Review your answers below.</p>
+            <button onclick="location.reload()" style="padding:10px 20px; cursor:pointer;">Logout / Restart</button>
+        </div>
+
+        <div class="intro-text" id="introBox">
+            <strong>Book:</strong> Purpose-Driven Life | <strong>Author:</strong> Rick Warren<br>
+            <em>Instruction: Choose the correct answer from the options provided.</em>
+        </div>
+
+        <form id="cbtForm">
+            <div id="questionContainer"></div>
+            
+            <div class="submit-area" id="submitBtnContainer">
+                <button type="button" id="finalSubmit" onclick="processSubmission()">Submit Examination</button>
+            </div>
+        </form>
+    </div>
 
 <script>
-    const questions = [
-        // Objectives
-        { q: "A lion is a __________ animal.", type: "mcq", options: ["wild", "weak", "small"], correct: "wild" },
-        { q: "Lagos is a big __________.", type: "mcq", options: ["farm", "city", "village"], correct: "city" },
-        { q: "Goats are __________ animals.", type: "mcq", options: ["quiet", "naughty", "slow"], correct: "naughty" },
-        { q: "Sharon is a __________ girl.", type: "mcq", options: ["good", "bad", "tall"], correct: "good" },
-        { q: "John is a __________ boy.", type: "mcq", options: ["fine", "short", "dirty"], correct: "fine" },
-        { q: "We begin every sentence with a __________ letter.", type: "mcq", options: ["small", "capital", "tiny"], correct: "capital" },
-        { q: "A full stop is used at the __________ of a sentence.", type: "mcq", options: ["beginning", "middle", "end"], correct: "end" },
-        { q: "My father is a __________.", type: "mcq", options: ["teacher", "goat", "child"], correct: "teacher" },
-        { q: "Nigeria is a _________.", type: "mcq", options: ["city", "country", "house"], correct: "country" },
-        { q: "Please __________ in.", type: "mcq", options: ["come", "eat", "sleep"], correct: "come" },
-        { q: "The troll lived under the __________.", type: "mcq", options: ["tree", "bridge", "house"], correct: "bridge" },
-        { q: "There __________ three billy goats.", type: "mcq", options: ["was", "were", "is"], correct: "were" },
-        { q: "The goats wanted to become _________.", type: "mcq", options: ["fat", "thin", "weak"], correct: "fat" },
-        { q: "The troll __________ loudly.", type: "mcq", options: ["roared", "cried", "laughed"], correct: "roared" },
-        { q: "The goat used a __________ to fight the troll.", type: "mcq", options: ["horns", "rope", "basket"], correct: "horns" },
-        { q: "Obi eats a __________ every day.", type: "mcq", options: ["banana", "rice", "yam"], correct: "banana" },
-        { q: "Chidi fell off his _________.", type: "mcq", options: ["bicycle", "car", "chair"], correct: "bicycle" },
-        { q: "The driver drove __________.", type: "mcq", options: ["slow", "fast", "late"], correct: "fast" },
-        { q: "Jummai likes jollof__________ a lot.", type: "mcq", options: ["rice", "meat", "fish"], correct: "rice" },
-        { q: "Our best subject is __________.", type: "mcq", options: ["English", "chair", "bag"], correct: "English" },
-        { q: "The teacher is __________ on the board.", type: "mcq", options: ["writing", "sleeping", "eating"], correct: "writing" },
-        { q: "The children are __________ on the playground.", type: "mcq", options: ["playing", "reading", "cooking"], correct: "playing" },
-        { q: "Granny is __________ on the bed.", type: "mcq", options: ["sleeping", "running", "shouting"], correct: "sleeping" },
-        { q: "The girls are __________ there books.", type: "mcq", options: ["running", "eating", "reading"], correct: "reading" },
-        { q: "The trader is __________ oranges.", type: "mcq", options: ["selling", "washing", "cooking"], correct: "selling" },
-        { q: "A friend is also called a __________.", type: "mcq", options: ["pal", "enemy", "stranger"], correct: "pal" },
-        { q: "The word 'small' also means __________.", type: "mcq", options: ["tiny", "large", "long"], correct: "tiny" },
-        { q: "The word 'fast' also means __________.", type: "mcq", options: ["quick", "slow", "weak"], correct: "quick" },
-        { q: "The word 'shut' also means __________.", type: "mcq", options: ["close", "open", "jump"], correct: "close" },
-        { q: "The word 'happy' also means __________.", type: "mcq", options: ["glad", "sad", "angry"], correct: "glad" },
-        
-        // Verbal Reasoning - Kk
-        { q: "Choose word starting with Kk: Canoe, Cane, Kitten, Chicken", type: "mcq", options: ["Canoe", "Cane", "Kitten", "Chicken"], correct: "Kitten" },
-        { q: "Choose word starting with Kk: Club, Kettle, Cow, Come", type: "mcq", options: ["Club", "Kettle", "Cow", "Come"], correct: "Kettle" },
-        { q: "Choose word starting with Kk: Comb, Clean, Job, Kite", type: "mcq", options: ["Comb", "Clean", "Job", "Kite"], correct: "Kite" },
-        { q: "Choose word starting with Kk: Nest, Farm, Kangaroo, House", type: "mcq", options: ["Nest", "Farm", "Kangaroo", "House"], correct: "Kangaroo" },
-        { q: "Choose word starting with Kk: Kennel, Fish, Bat, cat", type: "mcq", options: ["Kennel", "Fish", "Bat", "cat"], correct: "Kennel" },
+// (Questions array remains the same as your original)
+const questions = [
+    {q: "The meaning of life begins with ___", options: ["Self", "Success", "God", "Friends"], answer: "God"},
+    {q: "A self-centered life leads to ___", options: ["Peace", "Confusion", "Joy", "Wisdom"], answer: "Confusion"},
+    {q: "You discover purpose when you acknowledge that ___", options: ["You created yourself", "God created you", "Life is luck", "People define you"], answer: "God created you"},
+    {q: "Your life is ___", options: ["Accidental", "Random", "Planned by God", "Meaningless"], answer: "Planned by God"},
+    {q: "Motives determine your ___", options: ["Height", "Direction", "Wealth", "Age"], answer: "Direction"},
+    {q: "Which can wrongly drive a person?", options: ["Fear", "Guilt", "Materialism", "All of these"], answer: "All of these"},
+    {q: "Earth is described as ___", options: ["Eternal home", "Temporary", "Heaven", "Paradise"], answer: "Temporary"},
+    {q: "Earth is a 'dress rehearsal' for ___", options: ["Success", "Retirement", "Eternity", "School"], answer: "Eternity"},
+    {q: "Life is a test of your ___", options: ["Popularity", "Character", "Fame", "Looks"], answer: "Character"},
+    {q: "Life is a trust because God gives you ___", options: ["Responsibilities", "Nothing", "Fame", "Luck"], answer: "Responsibilities"},
+    {q: "The ultimate purpose of life is to ___", options: ["Be rich", "Be famous", "Bring glory to God", "Compete"], answer: "Bring glory to God"},
+    {q: "Which is NOT one of the five purposes?", options: ["Worship", "Fellowship", "Competition", "Mission"], answer: "Competition"},
+    {q: "Worship is ___", options: ["Singing only", "A lifestyle", "A building", "An event only"], answer: "A lifestyle"},
+    {q: "True worship requires ___", options: ["50% effort", "95% effort", "Full surrender", "Talent"], answer: "Full surrender"},
+    {q: "Friendship with God includes ___", options: ["Trust", "Honesty", "Communication", "All of these"], answer: "All of these"},
+    {q: "Constant conversation with God is called ___", options: ["Meditation", "Prayer", "Singing", "Fellowship"], answer: "Prayer"},
+    {q: "Meditation means ___", options: ["Sleeping", "Deep thinking on God’s Word", "Talking loudly", "Ignoring God"], answer: "Deep thinking on God’s Word"},
+    {q: "When God seems distant, we should ___", options: ["Quit", "Doubt", "Trust His promises", "Complain"], answer: "Trust His promises"},
+    {q: "Humans are made for ___", options: ["Isolation", "Community", "Competition", "Fame"], answer: "Community"},
+    {q: "The church is described as a ___", options: ["Business", "Family", "Market", "Club"], answer: "Family"},
+    {q: "Love is more important than ___", options: ["Religious activity", "Money", "School", "Travel"], answer: "Religious activity"},
+    {q: "Healthy fellowship includes ___", options: ["Gossip", "Pride", "Mercy", "Anger"], answer: "Mercy"},
+    {q: "Broken fellowship should be ___", options: ["Ignored", "Restored", "Hidden", "Avoided"], answer: "Restored"},
+    {q: "Church unity must be ___", options: ["Destroyed", "Protected", "Questioned", "Divided"], answer: "Protected"},
+    {q: "Spiritual maturity means becoming like ___", options: ["Friends", "Leaders", "Christ", "Celebrities"], answer: "Christ"},
+    {q: "Growth happens ___", options: ["Overnight", "Instantly", "Gradually", "Automatically"], answer: "Gradually"},
+    {q: "Trouble helps build ___", options: ["Fear", "Character", "Pride", "Laziness"], answer: "Character"},
+    {q: "God’s Word helps to ___", options: ["Shape character", "Confuse people", "Create fear", "Entertain"], answer: "Shape character"},
+    {q: "Temptation reveals the ___", options: ["Bank account", "Heart", "Fame", "Friends"], answer: "Heart"},
+    {q: "Overcoming temptation builds ___", options: ["Weakness", "Strength", "Anger", "Pride"], answer: "Strength"},
+    {q: "Accepting your assignment means ___", options: ["Comparing yourself", "Embracing God’s plan", "Complaining", "Quitting"], answer: "Embracing God’s plan"},
+    {q: "SHAPE includes all except ___", options: ["Spiritual gifts", "Heart", "Wealth", "Experiences"], answer: "Wealth"},
+    {q: "Ministry means serving ___", options: ["Yourself", "Believers", "Money", "Fame"], answer: "Believers"},
+    {q: "Mission means reaching ___", options: ["Unbelievers", "Buildings", "Animals", "Wealth"], answer: "Unbelievers"},
+    {q: "Your testimony includes ___", options: ["Life before Christ", "Meeting Christ", "Life after Christ", "All of these"], answer: "All of these"},
+    {q: "A world-class Christian pursues ___", options: ["Laziness", "Mediocrity", "Excellence", "Pride"], answer: "Excellence"},
+    {q: "A purpose-driven life balances ___ purposes", options: ["Two", "Three", "Five", "Seven"], answer: "Five"},
+    {q: "Worship means ___", options: ["Loving God", "Loving money", "Loving fame", "Loving success"], answer: "Loving God"},
+    {q: "Living on purpose affects ___", options: ["Today only", "Eternity", "School only", "Work only"], answer: "Eternity"},
+    {q: "The final challenge is to ___", options: ["Write a purpose statement", "Seek fame", "Ignore purpose", "Compete"], answer: "Write a purpose statement"}
+];
 
-        // Fill in letters
-        { q: "Complete with f, g, h, i, or j: ___ air", type: "text", correct: "f" },
-        { q: "Complete with f, g, h, i, or j: ___ ather", type: "text", correct: "f" },
-        { q: "Complete with f, g, h, i, or j: ___ oy", type: "text", correct: "j" },
-        { q: "Complete with f, g, h, i, or j: Bu___", type: "text", correct: "g" },
-        { q: "Complete with f, g, h, i, or j: ___ oat", type: "text", correct: "g" }
-    ];
+let timerInterval;
+let timeLeft = 2700; 
 
-    let currentIdx = 0;
-    let time = 45 * 60;
-    let timerInterval;
-    let userAnswers = {};
-
-    function startExam() {
-        const name = document.getElementById('candidate-name').value;
-        if (!name) return alert("Please enter your name");
-        
-        document.getElementById('display-name').innerText = "Candidate: " + name;
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('exam-section').classList.remove('hidden');
-        
-        renderQuestions();
-        startTimer();
+function startExam() {
+    const name = document.getElementById("studentName").value;
+    if (name.trim() === "") {
+        alert("Please enter your name to continue.");
+        return;
     }
+    document.getElementById("displayName").innerText = name;
+    document.getElementById("loginOverlay").style.display = "none";
+    renderQuestions();
+    beginCountdown();
+}
 
-    function renderQuestions() {
-        const wrapper = document.getElementById('questions-wrapper');
-        questions.forEach((quest, index) => {
-            const div = document.createElement('div');
-            div.className = `question-container ${index === 0 ? 'active' : ''}`;
-            div.id = `q-${index}`;
-            
-            let html = `<div class="question-text">Question ${index + 1}: ${quest.q}</div>`;
-            
-            if (quest.type === 'mcq') {
-                html += `<div class="options-list">`;
-                quest.options.forEach(opt => {
-                    html += `
-                        <label class="option">
-                            <input type="radio" name="answer-${index}" value="${opt}" onchange="saveAnswer(${index}, '${opt}')">
-                            ${opt}
-                        </label>`;
-                });
-                html += `</div>`;
+function renderQuestions() {
+    const container = document.getElementById("questionContainer");
+    questions.forEach((q, idx) => {
+        const qHtml = `
+            <div class="q-card" id="card${idx}">
+                <div class="q-text">${idx + 1}. ${q.q}</div>
+                <div class="opt-list">
+                    ${q.options.map(opt => `
+                        <label class="opt-label" id="label-${idx}-${opt.replace(/\s+/g, '')}">
+                            <input type="radio" name="q${idx}" value="${opt}"> ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+                <div id="feedback${idx}" class="feedback-msg"></div>
+            </div>
+        `;
+        container.innerHTML += qHtml;
+    });
+}
+
+function beginCountdown() {
+    timerInterval = setInterval(() => {
+        let mins = Math.floor(timeLeft / 60);
+        let secs = timeLeft % 60;
+        document.getElementById("time").innerText = `${mins}:${secs < 10 ? '0' + secs : secs}`;
+        timeLeft--;
+        if (timeLeft < 0) {
+            clearInterval(timerInterval);
+            processSubmission();
+            alert("Time has expired!");
+        }
+    }, 1000);
+}
+
+function processSubmission() {
+    clearInterval(timerInterval);
+    let score = 0;
+    
+    // Disable all inputs so student can't change after seeing answers
+    const allInputs = document.querySelectorAll('input[type="radio"]');
+    allInputs.forEach(input => input.disabled = true);
+
+    questions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        const feedbackDiv = document.getElementById(`feedback${idx}`);
+        const correctAnswerCleaned = q.answer.replace(/\s+/g, '');
+        
+        // Highlight the correct option label in green always
+        const correctLabel = document.getElementById(`label-${idx}-${correctAnswerCleaned}`);
+        if(correctLabel) correctLabel.classList.add('correct-pick');
+
+        if (selected) {
+            const userValue = selected.value;
+            if (userValue === q.answer) {
+                score++;
+                feedbackDiv.innerHTML = `<span class="text-success">✓ Correct!</span>`;
             } else {
-                html += `<input type="text" class="text-input" placeholder="Type your answer here..." oninput="saveAnswer(${index}, this.value)">`;
+                // If wrong, highlight user choice in red
+                const wrongLabel = document.getElementById(`label-${idx}-${userValue.replace(/\s+/g, '')}`);
+                if(wrongLabel) wrongLabel.classList.add('wrong-pick');
+                feedbackDiv.innerHTML = `<span class="text-danger">✗ Incorrect. The correct answer was: <strong>${q.answer}</strong></span>`;
             }
-            
-            div.innerHTML = html;
-            wrapper.appendChild(div);
-        });
-        updateNav();
-    }
+        } else {
+            feedbackDiv.innerHTML = `<span class="text-danger">Not Answered. Correct answer: <strong>${q.answer}</strong></span>`;
+        }
+    });
 
-    function saveAnswer(idx, val) {
-        userAnswers[idx] = val.trim().toLowerCase();
-    }
-
-    function changeQuestion(step) {
-        document.getElementById(`q-${currentIdx}`).classList.remove('active');
-        currentIdx += step;
-        document.getElementById(`q-${currentIdx}`).classList.add('active');
-        updateNav();
-    }
-
-    function updateNav() {
-        document.getElementById('prev-btn').disabled = (currentIdx === 0);
-        const isLast = currentIdx === questions.length - 1;
-        document.getElementById('next-btn').classList.toggle('hidden', isLast);
-        document.getElementById('submit-btn').classList.toggle('hidden', !isLast);
-    }
-
-    function startTimer() {
-        timerInterval = setInterval(() => {
-            time--;
-            let mins = Math.floor(time / 60);
-            let secs = time % 60;
-            document.getElementById('timer').innerText = `Time Remaining: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
-            if (time <= 0) endExam();
-        }, 1000);
-    }
-
-    function endExam() {
-        clearInterval(timerInterval);
-        let score = 0;
-        let reviewHtml = '';
-
-        questions.forEach((q, idx) => {
-            const userAns = userAnswers[idx] || "No answer";
-            const isCorrect = userAns === q.correct.toLowerCase();
-            if (isCorrect) score++;
-
-            reviewHtml += `
-                <div class="review-item">
-                    <strong>Q${idx + 1}:</strong> ${q.q}<br>
-                    <span class="user-ans">Your Answer: ${userAns}</span><br>
-                    <span class="correct-ans">Correct Answer: ${q.correct}</span>
-                </div>`;
-        });
-
-        document.getElementById('exam-section').classList.add('hidden');
-        document.getElementById('result-section').classList.remove('hidden');
-        document.getElementById('final-score').innerText = `You scored ${score} out of ${questions.length}`;
-        document.getElementById('answer-review').innerHTML = reviewHtml;
-    }
+    // Update UI to show score at top
+    document.getElementById("submitBtnContainer").style.display = "none";
+    document.getElementById("introBox").style.display = "none";
+    document.getElementById("resultsArea").style.display = "block";
+    document.getElementById("scoreDisplay").innerText = `${score} / ${questions.length}`;
+    
+    // Scroll to top to see result
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
 </script>
 
 </body>
