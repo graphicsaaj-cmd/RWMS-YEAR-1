@@ -1,322 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROYAL WUNDERKIND MODEL SCHOOL - YEAR 7 CBT</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RWMS - SOCIAL & CITIZENSHIP STUDIES</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
-            margin: 0;
-            padding: 0;
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: #fdfdfd;
+            color: #333;
         }
-
-        /* LOGIN SYSTEM */
-        #loginOverlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #0a2a66;
+        .exam-header { 
+            text-align: center; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-top: 8px solid #3f51b5;
+        }
+        h1 { color: #1a237e; margin: 0; font-size: 1.7em; }
+        
+        .timer-container {
+            position: sticky;
+            top: 15px;
+            z-index: 1000;
             display: flex;
             justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            max-width: 450px;
-            width: 90%;
-        }
-        .login-box h2 { color: #0a2a66; margin-top: 0; }
-        .login-box input {
-            padding: 12px;
-            width: 85%;
-            margin: 20px 0;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-
-        /* HEADER */
-        .header-section {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 5px solid #0a2a66;
-        }
-        .header-section h1 { color: #0a2a66; margin: 0; font-size: 24px; }
-        .header-section h2 { color: #d35400; margin: 5px 0; font-size: 18px; }
-
-        /* STICKY STATUS BAR */
-        .status-bar {
-            position: sticky;
-            top: 0;
-            background: #0a2a66;
-            color: white;
-            padding: 12px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .timer-box {
-            background: #e74c3c;
-            padding: 5px 15px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        /* CONTENT */
-        .container {
-            max-width: 850px;
-            margin: 30px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .intro-text {
-            border-left: 5px solid #0a2a66;
-            padding-left: 15px;
-            margin-bottom: 30px;
-            color: #555;
-        }
-
-        .q-card {
             margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
         }
-        .q-text { font-size: 18px; font-weight: 600; margin-bottom: 15px; }
-        
-        .opt-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .opt-label {
-            background: #f9f9f9;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .opt-label:hover { background: #eef2f7; border-color: #0a2a66; }
-        .opt-label input { margin-right: 10px; }
-
-        /* FEEDBACK STYLES */
-        .correct-pick { background: #d4edda !important; border-color: #28a745 !important; }
-        .wrong-pick { background: #f8d7da !important; border-color: #dc3545 !important; }
-        .feedback-msg { margin-top: 10px; font-weight: bold; font-size: 14px; }
-        .text-success { color: #28a745; }
-        .text-danger { color: #dc3545; }
-
-        .submit-area { text-align: center; margin-top: 40px; }
-        #finalSubmit {
-            background: #27ae60;
+        #timer {
+            font-size: 1.4em;
+            font-weight: bold;
             color: white;
-            padding: 15px 50px;
+            background: #d32f2f;
+            padding: 12px 35px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+        }
+
+        .question-card {
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+            border-left: 6px solid #3f51b5;
+        }
+        .question-card h3 { margin-top: 0; color: #1a237e; font-size: 1.1em; }
+
+        .options label {
+            display: block;
+            margin: 12px 0;
+            padding: 14px;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .options label:hover { background: #e8eaf6; border-color: #3f51b5; }
+        .options input { margin-right: 12px; transform: scale(1.3); }
+
+        .correct-reveal {
+            margin-top: 15px;
+            padding: 12px;
+            background: #e8f5e9;
+            border: 1px dashed #2e7d32;
+            border-radius: 8px;
+            color: #2e7d32;
+            font-weight: bold;
+            display: none; 
+        }
+
+        #submitBtn {
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            margin: 40px auto;
+            padding: 18px;
+            font-size: 1.3em;
+            background: #1a237e;
+            color: white;
             border: none;
-            border-radius: 30px;
-            font-size: 20px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
+            transition: 0.3s;
         }
-        #finalSubmit:hover { background: #219150; }
+        #submitBtn:hover { background: #3949ab; transform: translateY(-2px); }
+        #submitBtn:disabled { background: #9e9e9e; cursor: not-allowed; }
 
-        #resultsArea {
+        .result-panel {
             display: none;
             text-align: center;
-            padding: 20px;
-            background: #fff;
-            border: 2px solid #0a2a66;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            background: #fff8e1;
+            padding: 40px;
+            border: 4px solid #ffc107;
+            border-radius: 20px;
+            margin-top: 30px;
         }
+        .score-big { font-size: 3.5em; color: #2e7d32; display: block; font-weight: 800; }
     </style>
 </head>
 <body>
 
-    <div id="loginOverlay">
-        <div class="login-box">
-            <img src="https://via.placeholder.com/80/0a2a66/ffffff?text=RWMS" alt="Logo" style="border-radius: 50%; margin-bottom: 15px;">
-            <h2>RWMS EXAMINATION PORTAL</h2>
-            <p><strong>Subject:</strong> Purpose-Driven Life (Rick Warren)<br><strong>Class:</strong> Year 7</p>
-            <input type="text" id="studentName" placeholder="Enter Full Name">
-            <button onclick="startExam()" style="background:#2ecc71; color:white; padding:12px 30px; border:none; border-radius:5px; cursor:pointer; width:90%; font-size:16px; font-weight:bold;">ACCESS EXAMINATION</button>
-        </div>
-    </div>
+<div class="exam-header">
+    <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
+    <p><strong>TERM TWO EXAMINATION, 2025/2026 ACADEMIC SESSION</strong></p>
+    <p>Class: Key Stage 1 (Year 1) | Subject: Social & Citizenship Studies</p>
+    <p>Duration: 45 Minutes</p>
+</div>
 
-    <div class="header-section">
-        <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
-        <h2>TERM 2 EXAMINATION – 2025/2026 SESSION</h2>
-    </div>
+<div class="timer-container">
+    <div id="timer">45:00</div>
+</div>
 
-    <div class="status-bar">
-        <div><strong>Student:</strong> <span id="displayName">---</span></div>
-        <div class="timer-box">Time: <span id="time">45:00</span></div>
-    </div>
+<form id="quizForm"></form>
 
-    <div class="container" id="mainExamBody">
-        <div id="resultsArea">
-            <h2 style="color:#0a2a66; margin:0;">Examination Completed</h2>
-            <div id="scoreDisplay" style="font-size: 40px; margin: 10px 0; color: #27ae60; font-weight: bold;"></div>
-            <p>Review your answers below.</p>
-            <button onclick="location.reload()" style="padding:10px 20px; cursor:pointer;">Logout / Restart</button>
-        </div>
+<button type="button" id="submitBtn" onclick="calculateResults()">Submit Final Answers</button>
 
-        <div class="intro-text" id="introBox">
-            <strong>Book:</strong> Purpose-Driven Life | <strong>Author:</strong> Rick Warren<br>
-            <em>Instruction: Choose the correct answer from the options provided.</em>
-        </div>
-
-        <form id="cbtForm">
-            <div id="questionContainer"></div>
-            
-            <div class="submit-area" id="submitBtnContainer">
-                <button type="button" id="finalSubmit" onclick="processSubmission()">Submit Examination</button>
-            </div>
-        </form>
-    </div>
+<div id="resultPanel" class="result-panel">
+    <h2>Examination Summary</h2>
+    <span id="scoreText" class="score-big">0 / 30</span>
+    <p id="percentageText" style="font-size: 1.4em; color: #555;"></p>
+    <p>Well done! Scroll down to see the correct answers highlighted in green.</p>
+</div>
 
 <script>
-// (Questions array remains the same as your original)
-const questions = [
-    {q: "The meaning of life begins with ___", options: ["Self", "Success", "God", "Friends"], answer: "God"},
-    {q: "A self-centered life leads to ___", options: ["Peace", "Confusion", "Joy", "Wisdom"], answer: "Confusion"},
-    {q: "You discover purpose when you acknowledge that ___", options: ["You created yourself", "God created you", "Life is luck", "People define you"], answer: "God created you"},
-    {q: "Your life is ___", options: ["Accidental", "Random", "Planned by God", "Meaningless"], answer: "Planned by God"},
-    {q: "Motives determine your ___", options: ["Height", "Direction", "Wealth", "Age"], answer: "Direction"},
-    {q: "Which can wrongly drive a person?", options: ["Fear", "Guilt", "Materialism", "All of these"], answer: "All of these"},
-    {q: "Earth is described as ___", options: ["Eternal home", "Temporary", "Heaven", "Paradise"], answer: "Temporary"},
-    {q: "Earth is a 'dress rehearsal' for ___", options: ["Success", "Retirement", "Eternity", "School"], answer: "Eternity"},
-    {q: "Life is a test of your ___", options: ["Popularity", "Character", "Fame", "Looks"], answer: "Character"},
-    {q: "Life is a trust because God gives you ___", options: ["Responsibilities", "Nothing", "Fame", "Luck"], answer: "Responsibilities"},
-    {q: "The ultimate purpose of life is to ___", options: ["Be rich", "Be famous", "Bring glory to God", "Compete"], answer: "Bring glory to God"},
-    {q: "Which is NOT one of the five purposes?", options: ["Worship", "Fellowship", "Competition", "Mission"], answer: "Competition"},
-    {q: "Worship is ___", options: ["Singing only", "A lifestyle", "A building", "An event only"], answer: "A lifestyle"},
-    {q: "True worship requires ___", options: ["50% effort", "95% effort", "Full surrender", "Talent"], answer: "Full surrender"},
-    {q: "Friendship with God includes ___", options: ["Trust", "Honesty", "Communication", "All of these"], answer: "All of these"},
-    {q: "Constant conversation with God is called ___", options: ["Meditation", "Prayer", "Singing", "Fellowship"], answer: "Prayer"},
-    {q: "Meditation means ___", options: ["Sleeping", "Deep thinking on God’s Word", "Talking loudly", "Ignoring God"], answer: "Deep thinking on God’s Word"},
-    {q: "When God seems distant, we should ___", options: ["Quit", "Doubt", "Trust His promises", "Complain"], answer: "Trust His promises"},
-    {q: "Humans are made for ___", options: ["Isolation", "Community", "Competition", "Fame"], answer: "Community"},
-    {q: "The church is described as a ___", options: ["Business", "Family", "Market", "Club"], answer: "Family"},
-    {q: "Love is more important than ___", options: ["Religious activity", "Money", "School", "Travel"], answer: "Religious activity"},
-    {q: "Healthy fellowship includes ___", options: ["Gossip", "Pride", "Mercy", "Anger"], answer: "Mercy"},
-    {q: "Broken fellowship should be ___", options: ["Ignored", "Restored", "Hidden", "Avoided"], answer: "Restored"},
-    {q: "Church unity must be ___", options: ["Destroyed", "Protected", "Questioned", "Divided"], answer: "Protected"},
-    {q: "Spiritual maturity means becoming like ___", options: ["Friends", "Leaders", "Christ", "Celebrities"], answer: "Christ"},
-    {q: "Growth happens ___", options: ["Overnight", "Instantly", "Gradually", "Automatically"], answer: "Gradually"},
-    {q: "Trouble helps build ___", options: ["Fear", "Character", "Pride", "Laziness"], answer: "Character"},
-    {q: "God’s Word helps to ___", options: ["Shape character", "Confuse people", "Create fear", "Entertain"], answer: "Shape character"},
-    {q: "Temptation reveals the ___", options: ["Bank account", "Heart", "Fame", "Friends"], answer: "Heart"},
-    {q: "Overcoming temptation builds ___", options: ["Weakness", "Strength", "Anger", "Pride"], answer: "Strength"},
-    {q: "Accepting your assignment means ___", options: ["Comparing yourself", "Embracing God’s plan", "Complaining", "Quitting"], answer: "Embracing God’s plan"},
-    {q: "SHAPE includes all except ___", options: ["Spiritual gifts", "Heart", "Wealth", "Experiences"], answer: "Wealth"},
-    {q: "Ministry means serving ___", options: ["Yourself", "Believers", "Money", "Fame"], answer: "Believers"},
-    {q: "Mission means reaching ___", options: ["Unbelievers", "Buildings", "Animals", "Wealth"], answer: "Unbelievers"},
-    {q: "Your testimony includes ___", options: ["Life before Christ", "Meeting Christ", "Life after Christ", "All of these"], answer: "All of these"},
-    {q: "A world-class Christian pursues ___", options: ["Laziness", "Mediocrity", "Excellence", "Pride"], answer: "Excellence"},
-    {q: "A purpose-driven life balances ___ purposes", options: ["Two", "Three", "Five", "Seven"], answer: "Five"},
-    {q: "Worship means ___", options: ["Loving God", "Loving money", "Loving fame", "Loving success"], answer: "Loving God"},
-    {q: "Living on purpose affects ___", options: ["Today only", "Eternity", "School only", "Work only"], answer: "Eternity"},
-    {q: "The final challenge is to ___", options: ["Write a purpose statement", "Seek fame", "Ignore purpose", "Compete"], answer: "Write a purpose statement"}
+const quizQuestions = [
+    { q: "Greeting is a way of showing ______.", opts: ["anger", "respect", "punishment"], correct: 1, text: "respect" },
+    { q: "Greeting is very important in Nigerian ______.", opts: ["culture", "food", "games"], correct: 0, text: "culture" },
+    { q: "Boys and men in Yoruba land greet elders by ______.", opts: ["running", "prostrating", "clapping"], correct: 1, text: "prostrating" },
+    { q: "Girls and women in Yoruba land greet elders by ______.", opts: ["kneeling", "sitting", "jumping"], correct: 0, text: "kneeling" },
+    { q: "“E kaaro” means ______.", opts: ["good night", "good afternoon", "good morning"], correct: 2, text: "good morning" },
+    { q: "Greeting helps us to live in ______.", opts: ["peace", "quarrel", "trouble"], correct: 0, text: "peace" },
+    { q: "Food gives us ______.", opts: ["sleep", "strength", "sickness"], correct: 1, text: "strength" },
+    { q: "Fruits help us stay ______.", opts: ["sick", "weak", "healthy"], correct: 2, text: "healthy" },
+    { q: "Smoking is ______ for our health.", opts: ["good", "helpful", "harmful"], correct: 2, text: "harmful" },
+    { q: "We drink water to quench our ______.", opts: ["hunger", "thirst", "anger"], correct: 1, text: "thirst" },
+    { q: "Overdose means taking too ______.", opts: ["little", "much", "fast"], correct: 1, text: "much" },
+    { q: "Too much food can cause ______.", opts: ["strength", "stomachache", "happiness"], correct: 1, text: "stomachache" },
+    { q: "Smoke can cause ______.", opts: ["coughing", "laughter", "strength"], correct: 0, text: "coughing" },
+    { q: "Choking makes it hard to ______.", opts: ["breathe", "sleep", "walk"], correct: 0, text: "breathe" },
+    { q: "Someone suffering from overdose should be taken to the ______.", opts: ["market", "hospital", "playground"], correct: 1, text: "hospital" },
+    { q: "A clean environment is free from ______.", opts: ["dirt", "water", "people"], correct: 0, text: "dirt" },
+    { q: "We use a ______ to sweep the floor.", opts: ["broom", "spoon", "plate"], correct: 0, text: "broom" },
+    { q: "Refuse should be put in a ______.", opts: ["bag", "dustbin", "pocket"], correct: 1, text: "dustbin" },
+    { q: "Dirty surroundings can cause ______.", opts: ["joy", "diseases", "wealth"], correct: 1, text: "diseases" },
+    { q: "Environmental sanitation is for ______ cleaning.", opts: ["private", "general", "secret"], correct: 1, text: "general" },
+    { q: "A broom is used for ______.", opts: ["cooking", "sweeping", "writing"], correct: 1, text: "sweeping" },
+    { q: "A cutlass is used to cut ______.", opts: ["grass", "paper", "plates"], correct: 0, text: "grass" },
+    { q: "A clean environment keeps us ______.", opts: ["sick", "healthy", "weak"], correct: 1, text: "healthy" },
+    { q: "Cleaning tools help us keep our surroundings ______.", opts: ["dirty", "messy", "clean"], correct: 2, text: "clean" },
+    { q: "Food is anything we ______ or drink.", opts: ["throw", "eat", "break"], correct: 1, text: "eat" },
+    { q: "We eat food to stay ______. ", opts: ["alive", "asleep", "dirty"], correct: 0, text: "alive" },
+    { q: "Eggs are ______ food.", opts: ["protective", "body-building", "sand"], correct: 1, text: "body-building" },
+    { q: "Fruits are ______ foods.", opts: ["body-building", "protective", "energy-giving"], correct: 1, text: "protective" },
+    { q: "Vegetables can be grown in the ______.", opts: ["garden", "classroom", "bag"], correct: 0, text: "garden" },
+    { q: "We should eat from all the food groups to stay ______.", opts: ["sick", "healthy", "tired"], correct: 1, text: "healthy" }
 ];
 
-let timerInterval;
-let timeLeft = 2700; 
-
-function startExam() {
-    const name = document.getElementById("studentName").value;
-    if (name.trim() === "") {
-        alert("Please enter your name to continue.");
-        return;
+// TIMER LOGIC
+let timeLeft = 45 * 60;
+const timerDisplay = document.getElementById('timer');
+const clock = setInterval(() => {
+    let m = Math.floor(timeLeft / 60);
+    let s = timeLeft % 60;
+    timerDisplay.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+    if (timeLeft <= 0) {
+        clearInterval(clock);
+        calculateResults();
+        alert("Time is up! Your exam has been submitted.");
     }
-    document.getElementById("displayName").innerText = name;
-    document.getElementById("loginOverlay").style.display = "none";
-    renderQuestions();
-    beginCountdown();
-}
+    timeLeft--;
+}, 1000);
 
-function renderQuestions() {
-    const container = document.getElementById("questionContainer");
-    questions.forEach((q, idx) => {
-        const qHtml = `
-            <div class="q-card" id="card${idx}">
-                <div class="q-text">${idx + 1}. ${q.q}</div>
-                <div class="opt-list">
-                    ${q.options.map(opt => `
-                        <label class="opt-label" id="label-${idx}-${opt.replace(/\s+/g, '')}">
-                            <input type="radio" name="q${idx}" value="${opt}"> ${opt}
-                        </label>
-                    `).join('')}
-                </div>
-                <div id="feedback${idx}" class="feedback-msg"></div>
-            </div>
-        `;
-        container.innerHTML += qHtml;
-    });
-}
+// BUILD EXAM
+const form = document.getElementById('quizForm');
+quizQuestions.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.innerHTML = `
+        <h3>${i + 1}. ${item.q}</h3>
+        <div class="options">
+            ${item.opts.map((opt, idx) => `
+                <label>
+                    <input type="radio" name="q${i}" value="${idx}">
+                    ${String.fromCharCode(97 + idx)}) ${opt}
+                </label>
+            `).join('')}
+        </div>
+        <div class="correct-reveal" id="ans-${i}">Correct Answer: "${item.text}"</div>
+    `;
+    form.appendChild(card);
+});
 
-function beginCountdown() {
-    timerInterval = setInterval(() => {
-        let mins = Math.floor(timeLeft / 60);
-        let secs = timeLeft % 60;
-        document.getElementById("time").innerText = `${mins}:${secs < 10 ? '0' + secs : secs}`;
-        timeLeft--;
-        if (timeLeft < 0) {
-            clearInterval(timerInterval);
-            processSubmission();
-            alert("Time has expired!");
-        }
-    }, 1000);
-}
-
-function processSubmission() {
-    clearInterval(timerInterval);
+// SUBMIT & GRADE
+function calculateResults() {
+    clearInterval(clock);
+    document.getElementById('submitBtn').disabled = true;
     let score = 0;
-    
-    // Disable all inputs so student can't change after seeing answers
-    const allInputs = document.querySelectorAll('input[type="radio"]');
-    allInputs.forEach(input => input.disabled = true);
 
-    questions.forEach((q, idx) => {
-        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
-        const feedbackDiv = document.getElementById(`feedback${idx}`);
-        const correctAnswerCleaned = q.answer.replace(/\s+/g, '');
-        
-        // Highlight the correct option label in green always
-        const correctLabel = document.getElementById(`label-${idx}-${correctAnswerCleaned}`);
-        if(correctLabel) correctLabel.classList.add('correct-pick');
-
-        if (selected) {
-            const userValue = selected.value;
-            if (userValue === q.answer) {
-                score++;
-                feedbackDiv.innerHTML = `<span class="text-success">✓ Correct!</span>`;
-            } else {
-                // If wrong, highlight user choice in red
-                const wrongLabel = document.getElementById(`label-${idx}-${userValue.replace(/\s+/g, '')}`);
-                if(wrongLabel) wrongLabel.classList.add('wrong-pick');
-                feedbackDiv.innerHTML = `<span class="text-danger">✗ Incorrect. The correct answer was: <strong>${q.answer}</strong></span>`;
-            }
-        } else {
-            feedbackDiv.innerHTML = `<span class="text-danger">Not Answered. Correct answer: <strong>${q.answer}</strong></span>`;
+    quizQuestions.forEach((item, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        document.getElementById(`ans-${i}`).style.display = 'block';
+        if (selected && parseInt(selected.value) === item.correct) {
+            score++;
         }
     });
 
-    // Update UI to show score at top
-    document.getElementById("submitBtnContainer").style.display = "none";
-    document.getElementById("introBox").style.display = "none";
-    document.getElementById("resultsArea").style.display = "block";
-    document.getElementById("scoreDisplay").innerText = `${score} / ${questions.length}`;
-    
-    // Scroll to top to see result
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    const panel = document.getElementById('resultPanel');
+    document.getElementById('scoreText').innerText = `${score} / 30`;
+    document.getElementById('percentageText').innerText = `Your score: ${Math.round((score/30)*100)}%`;
+    panel.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 
