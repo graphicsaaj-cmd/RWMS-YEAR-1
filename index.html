@@ -1,226 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>RWMS - SOCIAL & CITIZENSHIP STUDIES</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWMS - PHE EXAM</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 850px;
+            max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            line-height: 1.6;
-            background: #fdfdfd;
-            color: #333;
+            background-color: #f0f4f8;
+            color: #2c3e50;
         }
-        .exam-header { 
-            text-align: center; 
-            background: white; 
-            padding: 25px; 
-            border-radius: 15px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-            border-top: 8px solid #3f51b5;
-        }
-        h1 { color: #1a237e; margin: 0; font-size: 1.7em; }
-        
-        .timer-container {
-            position: sticky;
-            top: 15px;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-        #timer {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: white;
-            background: #d32f2f;
-            padding: 12px 35px;
-            border-radius: 50px;
-            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
-        }
-
-        .question-card {
-            margin: 20px 0;
-            padding: 25px;
-            border-radius: 12px;
+        /* New Start Screen Styles */
+        #start-screen {
+            text-align: center;
             background: white;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
-            border-left: 6px solid #3f51b5;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-top: 50px;
         }
-        .question-card h3 { margin-top: 0; color: #1a237e; font-size: 1.1em; }
-
-        .options label {
-            display: block;
-            margin: 12px 0;
-            padding: 14px;
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .options label:hover { background: #e8eaf6; border-color: #3f51b5; }
-        .options input { margin-right: 12px; transform: scale(1.3); }
-
-        .correct-reveal {
-            margin-top: 15px;
+        input[type="text"] {
             padding: 12px;
-            background: #e8f5e9;
-            border: 1px dashed #2e7d32;
+            width: 80%;
+            max-width: 300px;
+            border: 2px solid #27ae60;
             border-radius: 8px;
-            color: #2e7d32;
-            font-weight: bold;
-            display: none; 
+            font-size: 1em;
+            margin-bottom: 20px;
         }
-
-        #submitBtn {
-            display: block;
-            width: 100%;
-            max-width: 350px;
-            margin: 40px auto;
-            padding: 18px;
-            font-size: 1.3em;
-            background: #1a237e;
+        .start-btn {
+            padding: 12px 30px;
+            background: #27ae60;
             color: white;
             border: none;
-            border-radius: 12px;
-            cursor: pointer;
+            border-radius: 8px;
             font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Exam Content (Hidden initially) */
+        #exam-content { display: none; }
+
+        .exam-header {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border-top: 8px solid #27ae60;
+        }
+        h1 { color: #27ae60; margin: 0; font-size: 1.6em; }
+        .timer-container {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #timer {
+            background: #e74c3c;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.3em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .q-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .options-list { list-style: none; padding: 0; }
+        .options-list li { margin: 10px 0; }
+        label {
+            display: block;
+            padding: 12px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
             transition: 0.3s;
         }
-        #submitBtn:hover { background: #3949ab; transform: translateY(-2px); }
-        #submitBtn:disabled { background: #9e9e9e; cursor: not-allowed; }
-
-        .result-panel {
+        label:hover { background: #e8f5e9; }
+        input[type="radio"] { margin-right: 10px; }
+        
+        .answer-reveal {
+            margin-top: 15px;
+            padding: 10px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        button#submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button#submit-btn:disabled { background: #95a5a6; }
+        
+        #result-box {
             display: none;
             text-align: center;
-            background: #fff8e1;
-            padding: 40px;
-            border: 4px solid #ffc107;
-            border-radius: 20px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #27ae60;
             margin-top: 30px;
         }
-        .score-big { font-size: 3.5em; color: #2e7d32; display: block; font-weight: 800; }
+        .score-val { font-size: 2.5em; color: #27ae60; font-weight: bold; }
+        .candidate-display { font-style: italic; color: #7f8c8d; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-<div class="exam-header">
+<div id="start-screen">
     <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
-    <p><strong>TERM TWO EXAMINATION, 2025/2026 ACADEMIC SESSION</strong></p>
-    <p>Class: Key Stage 1 (Year 1) | Subject: Social & Citizenship Studies</p>
-    <p>Duration: 45 Minutes</p>
+    <p>PHE Examination - Year 1</p>
+    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+    <h3>Enter Candidate Full Name to Begin:</h3>
+    <input type="text" id="candidateNameInput" placeholder="Enter Full Name..." required>
+    <br>
+    <button class="start-btn" onclick="startExam()">Start Examination</button>
 </div>
 
-<div class="timer-container">
-    <div id="timer">45:00</div>
-</div>
+<div id="exam-content">
+    <div class="exam-header">
+        <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
+        <p><strong>TERM TWO EXAMINATION, 2025/2026 ACADEMIC SESSION</strong></p>
+        <p id="displayStudentName" class="candidate-display"></p>
+        <p>Class: Key Stage 1 (Year 1) | Subject: PHE</p>
+        <p>Duration: 45 Minutes</p>
+    </div>
 
-<form id="quizForm"></form>
+    <div class="timer-container">
+        <div id="timer">45:00</div>
+    </div>
 
-<button type="button" id="submitBtn" onclick="calculateResults()">Submit Final Answers</button>
+    <form id="quizForm"></form>
 
-<div id="resultPanel" class="result-panel">
-    <h2>Examination Summary</h2>
-    <span id="scoreText" class="score-big">0 / 30</span>
-    <p id="percentageText" style="font-size: 1.4em; color: #555;"></p>
-    <p>Well done! Scroll down to see the correct answers highlighted in green.</p>
+    <button id="submit-btn" onclick="gradeQuiz()">Submit Exam</button>
+
+    <div id="result-box">
+        <h2 id="congratsText">Exam Completed!</h2>
+        <div class="score-val" id="finalScore">0 / 30</div>
+        <p id="percentText"></p>
+        <p>Review the correct answers below.</p>
+    </div>
 </div>
 
 <script>
 const quizQuestions = [
-    { q: "Greeting is a way of showing ______.", opts: ["anger", "respect", "punishment"], correct: 1, text: "respect" },
-    { q: "Greeting is very important in Nigerian ______.", opts: ["culture", "food", "games"], correct: 0, text: "culture" },
-    { q: "Boys and men in Yoruba land greet elders by ______.", opts: ["running", "prostrating", "clapping"], correct: 1, text: "prostrating" },
-    { q: "Girls and women in Yoruba land greet elders by ______.", opts: ["kneeling", "sitting", "jumping"], correct: 0, text: "kneeling" },
-    { q: "“E kaaro” means ______.", opts: ["good night", "good afternoon", "good morning"], correct: 2, text: "good morning" },
-    { q: "Greeting helps us to live in ______.", opts: ["peace", "quarrel", "trouble"], correct: 0, text: "peace" },
-    { q: "Food gives us ______.", opts: ["sleep", "strength", "sickness"], correct: 1, text: "strength" },
-    { q: "Fruits help us stay ______.", opts: ["sick", "weak", "healthy"], correct: 2, text: "healthy" },
-    { q: "Smoking is ______ for our health.", opts: ["good", "helpful", "harmful"], correct: 2, text: "harmful" },
-    { q: "We drink water to quench our ______.", opts: ["hunger", "thirst", "anger"], correct: 1, text: "thirst" },
-    { q: "Overdose means taking too ______.", opts: ["little", "much", "fast"], correct: 1, text: "much" },
-    { q: "Too much food can cause ______.", opts: ["strength", "stomachache", "happiness"], correct: 1, text: "stomachache" },
-    { q: "Smoke can cause ______.", opts: ["coughing", "laughter", "strength"], correct: 0, text: "coughing" },
-    { q: "Choking makes it hard to ______.", opts: ["breathe", "sleep", "walk"], correct: 0, text: "breathe" },
-    { q: "Someone suffering from overdose should be taken to the ______.", opts: ["market", "hospital", "playground"], correct: 1, text: "hospital" },
-    { q: "A clean environment is free from ______.", opts: ["dirt", "water", "people"], correct: 0, text: "dirt" },
-    { q: "We use a ______ to sweep the floor.", opts: ["broom", "spoon", "plate"], correct: 0, text: "broom" },
-    { q: "Refuse should be put in a ______.", opts: ["bag", "dustbin", "pocket"], correct: 1, text: "dustbin" },
-    { q: "Dirty surroundings can cause ______.", opts: ["joy", "diseases", "wealth"], correct: 1, text: "diseases" },
-    { q: "Environmental sanitation is for ______ cleaning.", opts: ["private", "general", "secret"], correct: 1, text: "general" },
-    { q: "A broom is used for ______.", opts: ["cooking", "sweeping", "writing"], correct: 1, text: "sweeping" },
-    { q: "A cutlass is used to cut ______.", opts: ["grass", "paper", "plates"], correct: 0, text: "grass" },
-    { q: "A clean environment keeps us ______.", opts: ["sick", "healthy", "weak"], correct: 1, text: "healthy" },
-    { q: "Cleaning tools help us keep our surroundings ______.", opts: ["dirty", "messy", "clean"], correct: 2, text: "clean" },
-    { q: "Food is anything we ______ or drink.", opts: ["throw", "eat", "break"], correct: 1, text: "eat" },
-    { q: "We eat food to stay ______. ", opts: ["alive", "asleep", "dirty"], correct: 0, text: "alive" },
-    { q: "Eggs are ______ food.", opts: ["protective", "body-building", "sand"], correct: 1, text: "body-building" },
-    { q: "Fruits are ______ foods.", opts: ["body-building", "protective", "energy-giving"], correct: 1, text: "protective" },
-    { q: "Vegetables can be grown in the ______.", opts: ["garden", "classroom", "bag"], correct: 0, text: "garden" },
-    { q: "We should eat from all the food groups to stay ______.", opts: ["sick", "healthy", "tired"], correct: 1, text: "healthy" }
+    { q: "Minor games are __________ games.", o: ["difficult", "simple", "dangerous"], c: 1, text: "simple" },
+    { q: "Running in a circle helps to develop __________.", o: ["fighting", "balance", "sleeping"], c: 1, text: "balance" },
+    { q: "In shuttle relay, pupils play in __________.", o: ["teams", "alone", "water"], c: 0, text: "teams" },
+    { q: "We should not __________ during games.", o: ["push", "run", "listen"], c: 0, text: "push" },
+    { q: "Shuttle relay helps to develop __________.", o: ["teamwork", "laziness", "sadness"], c: 0, text: "teamwork" },
+    { q: "Minor games help us keep __________.", o: ["dirty", "fit", "tired"], c: 1, text: "fit" },
+    { q: "In shuttle relay we pass a __________. ", o: ["chair", "baton", "stone"], c: 1, text: "baton" },
+    { q: "Minor games are __________ and fun.", o: ["simple", "boring", "hard"], c: 0, text: "simple" },
+    { q: "Traditional dances are part of our __________.", o: ["culture", "road", "water"], c: 0, text: "culture" },
+    { q: "Music helps us to __________.", o: ["sleep", "move", "hide"], c: 1, text: "move" },
+    { q: "Dancing improves our __________.", o: ["balance", "laziness", "sadness"], c: 0, text: "balance" },
+    { q: "Drums are used in traditional __________.", o: ["cooking", "dancing", "washing"], c: 1, text: "dancing" },
+    { q: "Football is played with the __________.", o: ["hands", "feet", "head"], c: 1, text: "feet" },
+    { q: "Moving the ball with your feet is called __________.", o: ["sleeping", "dribbling", "hiding"], c: 1, text: "dribbling" },
+    { q: "Kicking the ball to another player is called __________.", o: ["passing", "crying", "jumping"], c: 0, text: "passing" },
+    { q: "Stopping the ball with your foot is called __________.", o: ["trapping", "throwing", "running"], c: 0, text: "trapping" },
+    { q: "Football is played between two __________.", o: ["animals", "teams", "chairs"], c: 1, text: "teams" },
+    { q: "Football helps us develop __________.", o: ["laziness", "teamwork", "sadness"], c: 1, text: "teamwork" },
+    { q: "Swimming is moving the body in __________.", o: ["sand", "water", "air"], c: 1, text: "water" },
+    { q: "We use our arms and __________ to swim.", o: ["legs", "ears", "nose"], c: 0, text: "legs" },
+    { q: "Staying on top of water is called __________.", o: ["running", "floating", "jumping"], c: 1, text: "floating" },
+    { q: "We must not swim without an __________.", o: ["adult", "baby", "toy"], c: 0, text: "adult" },
+    { q: "Running near the pool is __________.", o: ["safe", "dangerous", "good"], c: 1, text: "dangerous" },
+    { q: "Swimming helps us stay __________.", o: ["weak", "healthy", "tired"], c: 1, text: "healthy" },
+    { q: "Rest helps the body regain __________.", o: ["weakness", "strength", "sickness"], c: 1, text: "strength" },
+    { q: "Sleep usually happens at __________.", o: ["night", "noon", "afternoon"], c: 0, text: "night" },
+    { q: "After playing we should __________.", o: ["continue playing", "rest", "run"], c: 1, text: "rest" },
+    { q: "A short sleep during the day is called a __________.", o: ["nap", "race", "jump"], c: 0, text: "nap" },
+    { q: "We should sleep in a __________ place.", o: ["dirty", "noisy", "clean"], c: 2, text: "clean" },
+    { q: "Children need enough __________ to grow well.", o: ["food", "sleep", "toys"], c: 1, text: "sleep" }
 ];
 
-// TIMER LOGIC
-let timeLeft = 45 * 60;
-const timerDisplay = document.getElementById('timer');
-const clock = setInterval(() => {
-    let m = Math.floor(timeLeft / 60);
-    let s = timeLeft % 60;
-    timerDisplay.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
-    if (timeLeft <= 0) {
-        clearInterval(clock);
-        calculateResults();
-        alert("Time is up! Your exam has been submitted.");
+let studentName = "";
+let timerInterval;
+
+function startExam() {
+    const nameInput = document.getElementById('candidateNameInput').value;
+    if (nameInput.trim() === "") {
+        alert("Please enter candidate name before starting.");
+        return;
     }
-    timeLeft--;
-}, 1000);
+    
+    studentName = nameInput;
+    document.getElementById('displayStudentName').innerText = "Candidate: " + studentName;
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('exam-content').style.display = 'block';
+    
+    initTimer();
+    loadQuestions();
+}
 
-// BUILD EXAM
-const form = document.getElementById('quizForm');
-quizQuestions.forEach((item, i) => {
-    const card = document.createElement('div');
-    card.className = 'question-card';
-    card.innerHTML = `
-        <h3>${i + 1}. ${item.q}</h3>
-        <div class="options">
-            ${item.opts.map((opt, idx) => `
-                <label>
-                    <input type="radio" name="q${i}" value="${idx}">
-                    ${String.fromCharCode(97 + idx)}) ${opt}
-                </label>
-            `).join('')}
-        </div>
-        <div class="correct-reveal" id="ans-${i}">Correct Answer: "${item.text}"</div>
-    `;
-    form.appendChild(card);
-});
+function loadQuestions() {
+    const form = document.getElementById('quizForm');
+    quizQuestions.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.className = 'q-card';
+        div.innerHTML = `
+            <h3>${i + 1}. ${item.q}</h3>
+            <ul class="options-list">
+                ${item.o.map((opt, idx) => `
+                    <li><label><input type="radio" name="q${i}" value="${idx}"> ${String.fromCharCode(65 + idx)}. ${opt}</label></li>
+                `).join('')}
+            </ul>
+            <div class="answer-reveal" id="ans-${i}">Correct Answer: "${item.text}"</div>
+        `;
+        form.appendChild(div);
+    });
+}
 
-// SUBMIT & GRADE
-function calculateResults() {
-    clearInterval(clock);
-    document.getElementById('submitBtn').disabled = true;
+function initTimer() {
+    let totalTime = 45 * 60;
+    const timerDisplay = document.getElementById('timer');
+    timerInterval = setInterval(() => {
+        let mins = Math.floor(totalTime / 60);
+        let secs = totalTime % 60;
+        timerDisplay.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        if (totalTime <= 0) {
+            clearInterval(timerInterval);
+            gradeQuiz();
+        }
+        totalTime--;
+    }, 1000);
+}
+
+function gradeQuiz() {
+    clearInterval(timerInterval);
     let score = 0;
+    document.getElementById('submit-btn').disabled = true;
 
     quizQuestions.forEach((item, i) => {
         const selected = document.querySelector(`input[name="q${i}"]:checked`);
         document.getElementById(`ans-${i}`).style.display = 'block';
-        if (selected && parseInt(selected.value) === item.correct) {
+        if (selected && parseInt(selected.value) === item.c) {
             score++;
         }
     });
 
-    const panel = document.getElementById('resultPanel');
-    document.getElementById('scoreText').innerText = `${score} / 30`;
-    document.getElementById('percentageText').innerText = `Your score: ${Math.round((score/30)*100)}%`;
-    panel.style.display = 'block';
+    document.getElementById('result-box').style.display = 'block';
+    document.getElementById('congratsText').innerText = `Well done, ${studentName}!`;
+    document.getElementById('finalScore').innerText = `${score} / 30`;
+    document.getElementById('percentText').innerText = `Your score is ${Math.round((score/30)*100)}%`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
-
 </body>
 </html>
