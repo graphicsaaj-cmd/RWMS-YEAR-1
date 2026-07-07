@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Key Stage 1 (Year 1) Christian Religious Studies Examination</title>
+    <title>Key Stage 1 (Year 1) Examination</title>
     <style>
         :root {
             --primary-color: #002060;
@@ -128,12 +128,11 @@
         .section-header {
             background: #eef2f7;
             color: var(--primary-color);
-            padding: 12px 15px;
+            padding: 10px 15px;
             border-radius: 6px;
             font-weight: bold;
             margin: 25px 0 15px 0;
             border-left: 5px solid var(--secondary-color);
-            font-size: 16px;
         }
 
         .meta-info-strip {
@@ -188,7 +187,7 @@
             transform: scale(1.2);
         }
 
-        /* Auto-Marking UI Classes */
+        /* Auto-Marking State Classes */
         .option-node.correct-state {
             background-color: #d4edda !important;
             border-color: var(--success-color) !important;
@@ -234,7 +233,7 @@
 <header>
     <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
     <h2>TERM THREE EXAMINATION, 2025/2026 ACADEMIC SESSION</h2>
-    <h3>SUBJECT: CHRISTIAN RELIGIOUS STUDIES | CLASS: KEY STAGE 1 (YEAR 1)</h3>
+    <h3>CLASS: KEY STAGE 1 (YEAR 1)</h3>
 </header>
 
 <div class="container">
@@ -271,40 +270,30 @@
 <script>
     // Examination Bank Structure
     const questionsDatabase = [
-        { q: "God is our __________.", o: ["teacher", "father", "friend", "brother"], a: "B", section: "SECTION A - Instructions: Answer all questions" },
-        { q: "God is the Creator of __________.", o: ["books", "heaven and earth", "cars", "toys"], a: "B" },
-        { q: "We call God our Father because He __________ us.", o: ["hates", "loves", "ignores", "forgets"], a: "B" },
-        { q: "The Lord’s Prayer is found in the book of __________.", o: ["Genesis", "Matthew", "Psalms", "John"], a: "B" },
-        { q: "“Our Father which art in __________.”", o: ["earth", "school", "heaven", "house"], a: "C" },
-        { q: "We should always __________ to God.", o: ["shout", "pray", "fight", "hide"], a: "B" },
-        { q: "God makes the __________ shine.", o: ["moon", "sun", "star", "cloud"], a: "B" },
-        { q: "God gives us __________ to breathe.", o: ["water", "air", "sand", "fire"], a: "B" },
-        { q: "God does not want us to ___________.", o: ["eat", "worry", "sleep", "play"], a: "B" },
-        { q: "Thanking God means showing __________.", o: ["anger", "gratitude", "sadness", "fear"], a: "B" },
-        { q: "We say “thank you” when someone __________ us something.", o: ["takes", "gives", "hides", "breaks"], a: "B" },
-        { q: "God wants us to be __________.", o: ["ungrateful", "thankful", "proud", "rude"], a: "B" },
-        { q: "God keeps us __________.", o: ["weak", "alive", "sad", "tired"], a: "B" },
-        { q: "God __________ us when we are sick.", o: ["leaves", "heals", "forgets", "ignores"], a: "B" },
-        { q: "Moses is one person who __________ God.", o: ["ignored", "praised", "forgot", "feared"], a: "B" },
-        { q: "Abraham’s first name was __________.", o: ["Isaac", "Abram", "Jacob", "Lot"], a: "B" },
-        { q: "Abraham lived in __________ before God called him.", o: ["Egypt", "Haran", "Jerusalem", "Bethlehem"], a: "B" },
-        { q: "Abraham’s wife was called __________.", o: ["Mary", "Sarah", "Sarai", "Ruth"], a: "C" },
-        { q: "Joseph was the son of __________.", o: ["Abraham", "Jacob", "Moses", "David"], a: "B" },
-        { q: "Joseph’s mother was __________.", o: ["Sarah", "Rachel", "Ruth", "Mary"], a: "B" },
-        { q: "Joseph had __________ brothers.", o: ["ten", "eleven", "twelve", "nine"], a: "B" },
-        { q: "God turned water into __________ in Egypt.", o: ["milk", "blood", "oil", "juice"], a: "B" },
-        { q: "The Israelites crossed the __________ Sea.", o: ["Black", "Red", "Blue", "White"], a: "B" },
-        { q: "God helped Moses to __________ His people.", o: ["punish", "free", "sell", "forget"], a: "B" },
-        { q: "Samuel was a __________.", o: ["farmer", "judge", "soldier", "trader"], a: "B" },
-        { q: "Judges helped people to obey __________.", o: ["idols", "money", "God", "kings"], a: "C" },
-        { q: "Ehud defeated the king of __________.", o: ["Egypt", "Moab", "Nigeria", "Rome"], a: "B" },
-        { q: "Saul was the son of __________.", o: ["Jesse", "Kish", "David", "Samuel"], a: "B" },
-        { q: "Saul became king through __________.", o: ["war", "election", "anointing", "accident"], a: "C" },
-        { q: "God rejected Saul because he __________.", o: ["obeyed", "disobeyed", "prayed", "fasted"], a: "B" }
+        { q: "An _________ is a word used to described a noun or pronoun", o: ["Antonyms", "syllable", "adjective", "vocabulary"], a: "C" },
+        { q: "What do we use to say what someone did or what happened in the past?", o: ["present tense", "continuous tense", "simple past tense", "Adverb"], a: "C" },
+        { q: "An antonym is a word that has _____________ meaning to another word.", o: ["an opposite", "the same", "a similar", "no"], a: "A" },
+        { q: "What is the antonym of “man”", o: ["child", "boy", "woman", "girl"], a: "C" },
+        { q: "________ is the opposite of “last”", o: ["End", "Beginning", "Forward", "First"], a: "D" },
+        { q: "She works everyday", o: ["every", "day", "she", "works"], a: "D", section: "Underline the simple present tense from 6-8" },
+        { q: "Joseph brushes his teeth daily", o: ["brushes", "teeth", "daily", "Joseph"], a: "A" },
+        { q: "Bode washes plates", o: ["washes", "plates", "Bode", "none"], a: "A" },
+        { q: "Ike __________ football yesterday", o: ["playing", "play", "played", "paid"], a: "C" },
+        { q: "The governor __________ the school this morning", o: ["visit", "visited", "visiting", "visitor"], a: "B" },
+        { q: "James is a kind boy <br><small style='color:gray; font-weight:normal;'>What part of speech is the underlined word 'kind'?</small>", o: ["noun", "Adjective", "pronoun", "past tense"], a: "B" },
+        { q: "The flowers are very beautiful", o: ["flowers", "very", "are", "beautiful"], a: "D", section: "Underline the adjective in the following sentence from 12-15" },
+        { q: "I like red things", o: ["red", "things", "I", "like"], a: "A" },
+        { q: "I was very tired and hungry", o: ["tired", "tired and hungry", "very", "was"], a: "B" },
+        { q: "Mary has a new dress", o: ["dress", "new", "has", "Mary"], a: "B" },
+        { q: "How many syllables does the word “Computer” has", o: ["5", "4", "3", "2"], a: "C" },
+        { q: "How many syllables does the word “Television” has", o: ["5", "4", "3", "2"], a: "B" },
+        { q: "Lions lives in a ________", o: ["Kennel", "den", "cage", "nest"], a: "B" },
+        { q: "Where do crocodiles live________", o: ["jungle", "holes", "lake", "cave"], a: "C" },
+        { q: "He bought a shirt at the market <br><small style='color:gray; font-weight:normal;'>What part of speech is the underlined word 'bought'?</small>", o: ["noun", "Adjective", "Pronoun", "past tense"], a: "D" }
     ];
 
     let countdownTracker;
-    let timeRemainingSeconds = 30 * 60; // 30 Minutes
+    let timeRemainingSeconds = 30 * 60; // 30 Minutes allocation
     const lettersMap = ["A", "B", "C", "D"];
 
     function startAssessment() {
@@ -332,10 +321,11 @@
         questionsDatabase.forEach((questionItem, qIndex) => {
             const displayIndex = qIndex + 1;
 
+            // Insert sub-section dynamic header structures
             if (questionItem.section) {
                 const sectionDiv = document.createElement('div');
                 sectionDiv.className = 'section-header';
-                sectionDiv.innerText = questionItem.section;
+                sectionDiv.innerText = questionItem.section.toUpperCase();
                 targetContainer.appendChild(sectionDiv);
             }
 
@@ -348,7 +338,7 @@
                 structuralOptionsMarkup += `
                     <label class="option-node" id="node-box-${displayIndex}-${currentLetter}">
                         <input type="radio" name="question-id-${displayIndex}" value="${currentLetter}">
-                        <span><strong>${currentLetter.toLowerCase()}.</strong> ${optionValue}</span>
+                        <span><strong>${currentLetter}.</strong> ${optionValue}</span>
                     </label>
                 `;
             });
@@ -395,6 +385,7 @@
             const checkedLetter = checkedRadio ? checkedRadio.value : null;
             const targetCorrectLetter = questionItem.a;
 
+            // Freeze UI inputs
             const choicesElements = document.querySelectorAll(`input[name="question-id-${displayIndex}"]`);
             choicesElements.forEach(input => input.disabled = true);
 
@@ -407,10 +398,11 @@
                 }
                 document.getElementById(`node-box-${displayIndex}-${targetCorrectLetter}`).classList.add('correct-state');
                 
+                // Expose corrective text instruction line underneath
                 const solutionIndex = lettersMap.indexOf(targetCorrectLetter);
                 const explicitSolutionString = questionItem.o[solutionIndex];
                 const notificationDiv = document.getElementById(`feedback-id-${displayIndex}`);
-                notificationDiv.innerHTML = `Correction: The correct answer is <strong>${targetCorrectLetter.toLowerCase()}</strong> (${explicitSolutionString})`;
+                notificationDiv.innerHTML = `Correction: The correct answer is <strong>${targetCorrectLetter}</strong> (${explicitSolutionString})`;
                 notificationDiv.style.display = "block";
             }
         });
