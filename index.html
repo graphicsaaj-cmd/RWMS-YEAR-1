@@ -3,63 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Key Stage 1 (Year 1) Creative Arts Examination</title>
+    <title>Key Stage 1 Promotional Examination</title>
     <style>
         :root {
-            --primary-color: #002060;
-            --secondary-color: #D4AF37;
-            --success-color: #28a745;
-            --fail-color: #dc3545;
-            --light-bg: #f4f6f9;
-            --text-color: #333;
+            --primary: #4a90e2;
+            --secondary: #ff7675;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --background: #f4f7f6;
+            --text-main: #2c3e50;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            background-color: var(--light-bg);
-            color: var(--text-color);
         }
 
-        header {
-            background-color: var(--primary-color);
-            color: white;
+        .header-banner {
+            background-color: #002060;
+            color: #ffffff;
             text-align: center;
             padding: 25px 15px;
-            border-bottom: 5px solid var(--secondary-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 5px solid #d4af37;
         }
 
-        header h1 {
+        .header-banner h1 {
             margin: 0;
             font-size: 26px;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
 
-        header h2 {
-            margin: 6px 0;
+        .header-banner h2 {
+            margin: 8px 0 0 0;
             font-size: 16px;
             font-weight: normal;
             color: #e0e0e0;
-            letter-spacing: 0.5px;
         }
 
-        header h3 {
+        .header-banner h3 {
             margin: 5px 0 0 0;
             font-size: 14px;
             font-weight: bold;
-            color: var(--secondary-color);
+            color: #d4af37;
         }
 
-        .container {
+        .main-container {
             max-width: 800px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        .card {
+        .card-box {
             background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -67,46 +64,44 @@
             margin-bottom: 25px;
         }
 
-        #timer-banner {
+        #timer-box {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--fail-color);
+            background: #e74c3c;
             color: white;
-            padding: 12px 24px;
+            padding: 12px 20px;
             border-radius: 30px;
             font-size: 18px;
             font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             z-index: 1000;
             display: none;
-            border: 2px solid white;
         }
 
         #login-screen {
             text-align: center;
             max-width: 500px;
-            margin: 50px auto;
+            margin: 60px auto;
         }
 
-        .input-gate {
-            width: 85%;
-            padding: 14px 20px;
+        .input-field {
+            width: 80%;
+            padding: 12px 20px;
             margin: 20px 0;
             font-size: 16px;
             border: 2px solid #bdc3c7;
             border-radius: 8px;
             text-align: center;
             outline: none;
-            transition: border-color 0.2s;
         }
 
-        .input-gate:focus {
-            border-color: var(--primary-color);
+        .input-field:focus {
+            border-color: var(--primary);
         }
 
         .btn {
-            background-color: var(--primary-color);
+            background-color: var(--primary);
             color: white;
             border: none;
             padding: 14px 40px;
@@ -118,36 +113,24 @@
         }
 
         .btn:hover {
-            background-color: #001238;
+            background-color: #357abd;
         }
 
         #quiz-screen, #result-screen {
             display: none;
         }
 
-        .section-header {
+        .candidate-meta {
+            font-size: 16px;
             background: #eef2f7;
-            color: var(--primary-color);
-            padding: 12px 15px;
+            padding: 12px 20px;
             border-radius: 6px;
-            font-weight: bold;
-            margin: 25px 0 15px 0;
-            border-left: 5px solid var(--secondary-color);
-            font-size: 16px;
-        }
-
-        .meta-info-strip {
-            font-size: 16px;
-            background: #eef2f7;
-            padding: 15px 20px;
-            border-radius: 8px;
             margin-bottom: 25px;
             font-weight: bold;
-            border-left: 5px solid var(--secondary-color);
         }
 
-        .question-box {
-            border-left: 5px solid var(--primary-color);
+        .question-wrapper {
+            border-left: 5px solid var(--primary);
             background: #fafafa;
             padding: 20px;
             margin-bottom: 20px;
@@ -158,16 +141,15 @@
             font-size: 17px;
             font-weight: bold;
             margin-bottom: 15px;
-            line-height: 1.5;
         }
 
-        .options-grid {
+        .options-layout {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 12px;
         }
 
-        .option-node {
+        .option-item {
             display: flex;
             align-items: center;
             background: #ffffff;
@@ -178,248 +160,234 @@
             transition: all 0.2s;
         }
 
-        .option-node:hover {
+        .option-item:hover {
             background: #f1f5f9;
             border-color: #cbd5e1;
         }
 
-        .option-node input {
+        .option-item input {
             margin-right: 12px;
             transform: scale(1.2);
         }
 
-        /* Auto-Marking State Classes */
-        .option-node.correct-state {
+        /* Verification & State Styles */
+        .option-item.correct {
             background-color: #d4edda !important;
-            border-color: var(--success-color) !important;
+            border-color: var(--success) !important;
             color: #155724;
             font-weight: bold;
         }
 
-        .option-node.wrong-state {
+        .option-item.wrong {
             background-color: #f8d7da !important;
-            border-color: var(--fail-color) !important;
+            border-color: var(--danger) !important;
             color: #721c24;
         }
 
-        .correction-box {
+        .correction-badge {
             margin-top: 12px;
             font-weight: bold;
             color: #c0392b;
             font-size: 14px;
             display: none;
-            padding: 5px 0;
         }
 
-        .summary-dashboard {
+        .result-box {
             text-align: center;
             background: #e8f8f5;
-            border: 2px solid var(--success-color);
+            border: 2px solid var(--success);
             padding: 25px;
-            border-radius: 12px;
+            border-radius: 10px;
             margin-bottom: 30px;
         }
 
-        .summary-dashboard h2 {
+        .result-box h2 {
             margin: 0 0 10px 0;
             color: #117a65;
-            font-size: 24px;
         }
     </style>
 </head>
 <body>
 
-<div id="timer-banner">Time Left: 30:00</div>
+<div id="timer-box">Time Left: 30:00</div>
 
-<header>
+<div class="header-banner">
     <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
-    <h2>TERM THREE EXAMINATION, 2025/2026 ACADEMIC SESSION</h2>
-    <h3>CLASS: KEY STAGE 1 (YEAR 1)</h3>
-</header>
+    <h2>JALALA AREA, TANKE, OKE - ODO, ILORIN</h2>
+    <h3>PROMOTIONAL EXAMINATION 2025/2026 ACADEMIC SESSION</h3>
+</div>
 
-<div class="container">
+<div class="main-container">
     
-    <!-- Step 1: Candidate Verification Gate -->
-    <div id="login-screen" class="card">
-        <h2 style="margin-top:0; color: var(--primary-color);">Candidate Login</h2>
-        <p>Please enter your full name below to start your CBT exam.</p>
-        <input type="text" id="candidate-fullname" class="input-gate" placeholder="Surname & First Name" autocomplete="off">
+    <div id="login-screen" class="card-box">
+        <h2 style="margin-top:0;">Welcome Candidate</h2>
+        <p>Please type your complete name below to begin the assessment.</p>
+        <input type="text" id="student-name" class="input-field" placeholder="First Name & Surname" autocomplete="off">
         <br>
-        <button class="btn" onclick="startAssessment()">Begin Examination</button>
+        <button class="btn" onclick="initializeQuiz()">Start Assessment</button>
     </div>
 
-    <!-- Step 2: Main CBT Sheet -->
     <div id="quiz-screen">
-        <div class="meta-info-strip" id="student-details"></div>
+        <div class="candidate-meta" id="display-meta"></div>
         
-        <!-- Score Feedback View Panel -->
-        <div id="result-screen" class="summary-dashboard">
-            <h2 id="total-score-text"></h2>
-            <p>Please scroll down to review your automated corrections carefully.</p>
+        <div id="result-screen" class="result-box">
+            <h2 id="score-header"></h2>
+            <p>Review your auto-marked choices and corrections below.</p>
         </div>
 
-        <form id="cbt-form">
+        <form id="assessment-form">
             <div id="questions-outlet"></div>
             
             <div style="text-align: center; margin-top: 40px;">
-                <button type="button" id="submit-exam-btn" class="btn" style="background-color: var(--success-color);" onclick="gradeAssessment()">Submit Examination</button>
+                <button type="button" id="submit-exam-btn" class="btn" style="background-color: #27ae60;" onclick="processGrading()">Submit Examination</button>
             </div>
         </form>
     </div>
 </div>
 
 <script>
-    // Examination Bank Structure
-    const questionsDatabase = [
-        { q: "Melody is the __________ of a song", o: ["tune", "colour", "shape", "size"], a: "A", section: "SECTION A - Instructions: Answer all questions" },
-        { q: "The tonic solfa is made up of __________ notes", o: ["5", "6", "8", "10"], a: "C" },
-        { q: "Another name for tonic solfa is __________.", o: ["octave", "chorus", "rhythm", "verse"], a: "A" },
-        { q: "Storytelling is the act of __________ a story.", o: ["telling", "drawing", "hiding", "tearing"], a: "A" },
-        { q: "The person who tells a story is called the __________", o: ["audience", "narrator", "singer", "dancer"], a: "B" },
-        { q: "The people who listen to a story are called the __________.", o: ["audience", "actors", "farmers", "traders"], a: "A" },
-        { q: "Storytelling helps to teach good __________", o: ["morals", "noise", "quarrels", "laziness"], a: "A" },
-        { q: "Traditional festivals are special __________.", o: ["ceremonies", "classrooms", "markets", "roads"], a: "A" },
-        { q: "One thing associated with traditional festivals is __________.", o: ["music", "homework", "pencils", "uniforms"], a: "A" },
-        { q: "The first note of the tonic solfa is __________.", o: ["RE", "MI", "DO", "SO"], a: "C" },
-        { q: "The keyboard is used to play __________.", o: ["melodies", "food", "books", "games"], a: "A" },
-        { q: "A rising tone moves from __________ to higher sounds.", o: ["lower", "bigger", "louder", "slower"], a: "A" },
-        { q: "Traditional musical instruments are used to produce __________.", o: ["music", "food", "water", "books"], a: "A" },
-        { q: "The Bata drum is common among the __________ people.", o: ["Igbo", "Yoruba", "Fulani", "Kanuri"], a: "B" },
-        { q: "The __________ is called the talking drum.", o: ["Bata", "Kakaki", "Gangan", "Shekere"], a: "C" },
-        { q: "A traditional dance belongs to a particular __________.", o: ["community", "classroom", "market", "road"], a: "A" },
-        { q: "Traditional dances are performed to traditional __________.", o: ["music", "books", "stories", "games"], a: "A" },
-        { q: "The Bata dance is common among the __________ people.", o: ["Igbo", "Hausa", "Yoruba", "Efik"], a: "C" },
-        { q: "Folk songs are __________ songs.", o: ["modern", "traditional", "foreign", "church"], a: "B" },
-        { q: "Folk songs are sung in __________ languages.", o: ["foreign", "local", "computer", "school"], a: "B" },
-        { q: "One example of a Nigerian language is __________.", o: ["French", "Yoruba", "Spanish", "German"], a: "B" },
-        { q: "Body make-up is used for __________ the body.", o: ["destroying", "beautifying", "hiding", "breaking"], a: "B" },
-        { q: "Make-up is applied on the __________.", o: ["wall", "body", "floor", "table"], a: "B" },
-        { q: "One part of the body we beautify is the __________.", o: ["chair", "face", "bag", "book"], a: "B" },
-        { q: "Which of these is a motif?", o: ["book", "triangle", "shoe", "bag"], a: "B" },
-        { q: "We can use __________ to draw a motif.", o: ["water", "pencil", "sand", "stone"], a: "B" },
-        { q: "Which material is used for colouring?", o: ["ruler", "crayon", "eraser", "book"], a: "B" },
-        { q: "Music helps us to express our __________.", o: ["clothes", "feelings", "books", "toys"], a: "B" },
-        { q: "Music can be made with __________.", o: ["stones", "voices", "sand", "water"], a: "B" },
-        { q: "Which of these is a song?", o: ["table", "happy song", "chair", "pencil"], a: "B" }
+    // System Core Exam Bank
+    const itemsPool = [
+        { q: "Cleanliness helps to prevent", o: ["Happiness", "Sickness", "Food", "Play"], a: "B" },
+        { q: "We should wear", o: ["Dirty clothes", "Torn clothes", "Clean clothes", "Wet clothes"], a: "C" },
+        { q: "Toothpaste is used for", o: ["Eating", "Washing clothes", "Brushing teeth", "Sleeping"], a: "C" },
+        { q: "We use our mouth to __________.", o: ["walk", "eat", "run", "jump"], a: "B" },
+        { q: "We use our hands to __________.", o: ["hold", "smell", "hear", "see"], a: "A" },
+        { q: "We use our legs to __________.", o: ["write", "walk", "hear", "smell"], a: "B" },
+        { q: "Internal organs are found __________ the body.", o: ["outside", "inside", "above", "beside"], a: "B" },
+        { q: "The __________ controls the body.", o: ["heart", "brain", "lungs", "stomach"], a: "B" },
+        { q: "The heart __________ blood.", o: ["drinks", "pumps", "eats", "stores"], a: "B" },
+        { q: "We should cut our __________ regularly.", o: ["shoes", "fingernails", "bags", "desks"], a: "B" },
+        { q: "Cleanliness helps us stay __________.", o: ["sick", "healthy", "weak", "hungry"], a: "B" },
+        { q: "A clean child looks __________.", o: ["dirty", "smart", "rough", "tired"], a: "B" },
+        { q: "Cotton wool is a __________ item.", o: ["cooking", "first aid", "school", "sports"], a: "B" },
+        { q: "A cut may need __________.", o: ["food", "first aid", "music", "homework"], a: "B" },
+        { q: "First aid helps prevent injury from getting __________.", o: ["better", "worse", "smaller", "cleaner"], a: "B" },
+        { q: "A first aid box is used to keep __________ materials.", o: ["school", "sports", "first aid", "food"], a: "C" },
+        { q: "Cotton wool is used to __________ wounds.", o: ["dirty", "clean", "throw", "hide"], a: "B" },
+        { q: "Bandage is used to __________ wounds.", o: ["cover", "open", "cut", "break"], a: "A" },
+        { q: "Antiseptic helps to kill __________.", o: ["books", "germs", "pencils", "toys"], a: "B" },
+        { q: "Plaster is used for __________ cuts.", o: ["big", "small", "deep", "dirty"], a: "B" },
+        { q: "Gloves protect the __________.", o: ["legs", "hands", "eyes", "nose"], a: "B" },
+        { q: "Food helps us to __________.", o: ["sleep only", "grow and stay healthy", "cry", "fight"], a: "B" },
+        { q: "Rice comes from __________.", o: ["animal", "plant", "river", "sky"], a: "B" },
+        { q: "Milk comes from __________.", o: ["animal", "plant", "soil", "tree"], a: "A" },
+        { q: "Garri is made from __________.", o: ["yam", "cassava", "rice", "maize"], a: "B" },
+        { q: "Fish is food from __________.", o: ["plant", "animal", "tree", "fruit"], a: "B" },
+        { q: "Throwing refuse into water causes __________ pollution.", o: ["air", "water", "land", "sound"], a: "B" },
+        { q: "Loud music causes __________ pollution.", o: ["air", "land", "noise", "water"], a: "C" },
+        { q: "Throwing waste on the ground causes __________ pollution.", o: ["water", "land", "air", "sound"], a: "B" },
+        { q: "Pollution can cause __________.", o: ["health", "sickness", "joy", "learning"], a: "B" }
     ];
 
-    let countdownTracker;
-    let timeRemainingSeconds = 30 * 60; // 30 Minutes allocation
-    const lettersMap = ["A", "B", "C", "D"];
+    let countdownInterval;
+    let secondsLeft = 30 * 60; // 30 Minutes
+    const keys = ["A", "B", "C", "D"];
 
-    function startAssessment() {
-        const inputName = document.getElementById('candidate-fullname').value.trim();
-        if (inputName === "") {
-            alert("Access Denied: Please fill in the candidate's complete name setup.");
+    function initializeQuiz() {
+        const studentName = document.getElementById('student-name').value.trim();
+        if (studentName === "") {
+            alert("Please enter candidate name to continue.");
             return;
         }
 
-        // Display Toggle
+        // Configuration setup
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('quiz-screen').style.display = 'block';
-        document.getElementById('timer-banner').style.display = 'block';
+        document.getElementById('timer-box').style.display = 'block';
         
-        document.getElementById('student-details').innerText = `CANDIDATE: ${inputName.toUpperCase()} | CLASS: KEY STAGE 1 (YEAR 1) | INSTRUCTIONS: ANSWER ALL QUESTIONS`;
+        document.getElementById('display-meta').innerText = `CANDIDATE: ${studentName.toUpperCase()} | CLASS: KEY STAGE 1 (YEAR 1)`;
 
-        buildQuizSheet();
-        runClockCounter();
+        renderItems();
+        initiateTimer();
     }
 
-    function buildQuizSheet() {
-        const targetContainer = document.getElementById('questions-outlet');
-        targetContainer.innerHTML = "";
+    function renderItems() {
+        const structuralTarget = document.getElementById('questions-outlet');
+        structuralTarget.innerHTML = "";
 
-        questionsDatabase.forEach((questionItem, qIndex) => {
-            const displayIndex = qIndex + 1;
-
-            // Insert dynamic section header structures
-            if (questionItem.section) {
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'section-header';
-                sectionDiv.innerText = questionItem.section;
-                targetContainer.appendChild(sectionDiv);
-            }
-
+        itemsPool.forEach((item, index) => {
+            const itemNumber = index + 1;
             const block = document.createElement('div');
-            block.className = 'card question-box';
+            block.className = 'card-box question-wrapper';
 
-            let structuralOptionsMarkup = "";
-            questionItem.o.forEach((optionValue, oIndex) => {
-                const currentLetter = lettersMap[oIndex];
-                structuralOptionsMarkup += `
-                    <label class="option-node" id="node-box-${displayIndex}-${currentLetter}">
-                        <input type="radio" name="question-id-${displayIndex}" value="${currentLetter}">
-                        <span><strong>${currentLetter.toLowerCase()}.</strong> ${optionValue}</span>
+            let variantsMarkup = "";
+            item.o.forEach((option, idx) => {
+                const keyLetter = keys[idx];
+                variantsMarkup += `
+                    <label class="option-item" id="container-${itemNumber}-${keyLetter}">
+                        <input type="radio" name="item-${itemNumber}" value="${keyLetter}">
+                        <span><strong>${keyLetter}.</strong> ${option}</span>
                     </label>
                 `;
             });
 
             block.innerHTML = `
-                <div class="question-text">${displayIndex}. ${questionItem.q}</div>
-                <div class="options-grid">${structuralOptionsMarkup}</div>
-                <div class="correction-box" id="feedback-id-${displayIndex}"></div>
+                <div class="question-text">${itemNumber}. ${item.q}</div>
+                <div class="options-layout">${variantsMarkup}</div>
+                <div class="correction-badge" id="remedial-${itemNumber}"></div>
             `;
-            targetContainer.appendChild(block);
+            structuralTarget.appendChild(block);
         });
     }
 
-    function runClockCounter() {
-        countdownTracker = setInterval(() => {
-            timeRemainingSeconds--;
-            let computedMinutes = Math.floor(timeRemainingSeconds / 60);
-            let computedSeconds = timeRemainingSeconds % 60;
+    function initiateTimer() {
+        countdownInterval = setInterval(() => {
+            secondsLeft--;
+            let mins = Math.floor(secondsLeft / 60);
+            let secs = secondsLeft % 60;
 
-            computedMinutes = computedMinutes < 10 ? "0" + computedMinutes : computedMinutes;
-            computedSeconds = computedSeconds < 10 ? "0" + computedSeconds : computedSeconds;
+            mins = mins < 10 ? "0" + mins : mins;
+            secs = secs < 10 ? "0" + secs : secs;
 
-            document.getElementById('timer-banner').innerText = `Time Left: ${computedMinutes}:${computedSeconds}`;
+            document.getElementById('timer-box').innerText = `Time Left: ${mins}:${secs}`;
 
-            if (timeRemainingSeconds <= 0) {
-                clearInterval(countdownTracker);
-                alert("Time Limit Expired! Running automated system submission configuration.");
-                gradeAssessment();
+            if (secondsLeft <= 0) {
+                clearInterval(countdownInterval);
+                alert("Time allocation expired! Processing systemic automated submission.");
+                processGrading();
             }
         }, 1000);
     }
 
-    function gradeAssessment() {
-        clearInterval(countdownTracker);
-        document.getElementById('timer-banner').style.display = 'none';
+    function processGrading() {
+        clearInterval(countdownInterval);
+        document.getElementById('timer-box').style.display = 'none';
         document.getElementById('submit-exam-btn').style.display = 'none';
 
-        let accurateAnswersTally = 0;
-        const completeCount = questionsDatabase.length;
+        let correctTally = 0;
+        const totalItems = itemsPool.length;
 
-        questionsDatabase.forEach((questionItem, qIndex) => {
-            const displayIndex = qIndex + 1;
-            const checkedRadio = document.querySelector(`input[name="question-id-${displayIndex}"]:checked`);
-            const checkedLetter = checkedRadio ? checkedRadio.value : null;
-            const targetCorrectLetter = questionItem.a;
+        itemsPool.forEach((item, index) => {
+            const itemNumber = index + 1;
+            const targetSelection = document.querySelector(`input[name="item-${itemNumber}"]:checked`);
+            const selectedLetter = targetSelection ? targetSelection.value : null;
+            const correctLetter = item.a;
 
-            // Freeze UI choices
-            const choicesElements = document.querySelectorAll(`input[name="question-id-${displayIndex}"]`);
-            choicesElements.forEach(input => input.disabled = true);
+            // Strict lock inputs
+            const choices = document.querySelectorAll(`input[name="item-${itemNumber}"]`);
+            choices.forEach(input => input.disabled = true);
 
-            if (checkedLetter === targetCorrectLetter) {
-                accurateAnswersTally++;
-                document.getElementById(`node-box-${displayIndex}-${targetCorrectLetter}`).classList.add('correct-state');
+            if (selectedLetter === correctLetter) {
+                correctTally++;
+                document.getElementById(`container-${itemNumber}-${correctLetter}`).classList.add('correct');
             } else {
-                if (checkedLetter) {
-                    document.getElementById(`node-box-${displayIndex}-${checkedLetter}`).classList.add('wrong-state');
+                if (selectedLetter) {
+                    document.getElementById(`container-${itemNumber}-${selectedLetter}`).classList.add('wrong');
                 }
-                document.getElementById(`node-box-${displayIndex}-${targetCorrectLetter}`).classList.add('correct-state');
+                document.getElementById(`container-${itemNumber}-${correctLetter}`).classList.add('correct');
                 
-                // Expose corrective panel under skipped/wrong answers
-                const solutionIndex = lettersMap.indexOf(targetCorrectLetter);
-                const explicitSolutionString = questionItem.o[solutionIndex];
-                const notificationDiv = document.getElementById(`feedback-id-${displayIndex}`);
-                notificationDiv.innerHTML = `Correction: The correct answer is <strong>${targetCorrectLetter.toLowerCase()}</strong> (${explicitSolutionString})`;
-                notificationDiv.style.display = "block";
+                // Expose corrective text instruction underneath
+                const textualTargetIndex = keys.indexOf(correctLetter);
+                const stringAnswer = item.o[textualTargetIndex];
+                const feedbackDiv = document.getElementById(`remedial-${itemNumber}`);
+                feedbackDiv.innerText = `Correction: The correct option is ${correctLetter} (${stringAnswer})`;
+                feedbackDiv.style.display = "block";
             }
         });
 
-        const calculationPercentage = Math.round((accurateAnswersTally / completeCount) * 100);
-        document.getElementById('total-score-text').innerText = `Examination Completed! Total Score: ${accurateAnswersTally} / ${completeCount} (${calculationPercentage}%)`;
+        const performancePercentage = Math.round((correctTally / totalItems) * 100);
+        document.getElementById('score-header').innerText = `Score Summary: ${correctTally} / ${totalItems} (${performancePercentage}%)`;
         document.getElementById('result-screen').style.display = 'block';
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
