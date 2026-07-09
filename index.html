@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Key Stage 1 (Year 1) Humanities Examination</title>
+    <title>Key Stage 1 (Year 1) Examination</title>
     <style>
         :root {
             --primary-color: #002060;
@@ -33,7 +33,7 @@
 
         header h1 {
             margin: 0;
-            font-size: 26px;
+            font-size: 24px;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -125,6 +125,17 @@
             display: none;
         }
 
+        .section-header {
+            background: #eef2f7;
+            color: var(--primary-color);
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+            border-left: 5px solid var(--secondary-color);
+            font-size: 16px;
+        }
+
         .meta-info-strip {
             font-size: 16px;
             background: #eef2f7;
@@ -177,7 +188,7 @@
             transform: scale(1.2);
         }
 
-        /* Auto-Marking State Classes */
+        /* Auto-Marking Feedback Styles */
         .option-node.correct-state {
             background-color: #d4edda !important;
             border-color: var(--success-color) !important;
@@ -223,11 +234,12 @@
 <header>
     <h1>ROYAL WUNDERKIND MODEL SCHOOL</h1>
     <h2>TERM THREE EXAMINATION, 2025/2026 ACADEMIC SESSION</h2>
-    <h3>SUBJECT: HUMANITIES | CLASS: KEY STAGE 1 (YEAR 1)</h3>
+    <h3>CLASS: KEY STAGE 1 (YEAR 1)</h3>
 </header>
 
 <div class="container">
     
+    <!-- Step 1: Candidate Entry Name Gate -->
     <div id="login-screen" class="card">
         <h2 style="margin-top:0; color: var(--primary-color);">Candidate Login</h2>
         <p>Please enter your full name below to start your CBT exam.</p>
@@ -236,9 +248,11 @@
         <button class="btn" onclick="startAssessment()">Begin Examination</button>
     </div>
 
+    <!-- Step 2: Main CBT Sheet -->
     <div id="quiz-screen">
         <div class="meta-info-strip" id="student-details"></div>
         
+        <!-- Results Score Panel Dashboard -->
         <div id="result-screen" class="summary-dashboard">
             <h2 id="total-score-text"></h2>
             <p>Please scroll down to review your automated corrections carefully.</p>
@@ -255,52 +269,52 @@
 </div>
 
 <script>
-    // Examination Bank Structure
+    // System Question Configuration Database
     const questionsDatabase = [
-        { q: "In Northern Nigeria, a traditional ruler is called __________.", o: ["Oba", "Emir", "Igwe", "Chief"], a: "B" },
-        { q: "In Igbo land, a traditional ruler is called __________.", o: ["Emir", "Oba", "Igwe", "King"], a: "C" },
-        { q: "Traditional leaders are __________ by the people.", o: ["hated", "ignored", "respected", "punished"], a: "C" },
-        { q: "Nigeria has __________ states.", o: ["30", "36", "40", "50"], a: "B" },
-        { q: "The capital of Nigeria is __________.", o: ["Lagos", "Kano", "Abuja", "Ibadan"], a: "C" },
-        { q: "State creation makes __________ easier.", o: ["playing", "governing", "eating", "sleeping"], a: "B" },
-        { q: "The capital of Lagos State is __________.", o: ["Ibadan", "Ikeja", "Abuja", "Kano"], a: "B" },
-        { q: "The capital of Oyo State is __________.", o: ["Ibadan", "Ilorin", "Osogbo", "Akure"], a: "A" },
-        { q: "The capital of Rivers State is __________.", o: ["Calabar", "Port Harcourt", "Uyo", "Warri"], a: "B" },
-        { q: "Local government takes care of people in __________.", o: ["countries", "towns", "continents", "oceans"], a: "B" },
-        { q: "Local government helps to build __________.", o: ["books", "roads", "clothes", "toys"], a: "B" },
-        { q: "Local government provides __________.", o: ["markets", "cars", "planes", "shoes"], a: "A" },
-        { q: "A local government chairman is a __________.", o: ["pupil", "leader", "trader", "driver"], a: "B" },
-        { q: "The chairman is the __________ of the local government.", o: ["follower", "head", "child", "visitor"], a: "B" },
-        { q: "The chairman helps to build __________.", o: ["clothes", "roads", "toys", "books"], a: "B" },
-        { q: "Weather is the condition of the __________.", o: ["atmosphere", "classroom", "road", "market"], a: "A" },
-        { q: "A day with bright sunshine is called __________ weather.", o: ["rainy", "cloudy", "sunny", "windy"], a: "C" },
-        { q: "Erosion is the washing away of __________.", o: ["books", "soil", "chairs", "clothes"], a: "B" },
-        { q: "We should avoid __________ areas during floods.", o: ["dry", "flooded", "safe", "clean"], a: "B" },
-        { q: "We should listen to __________ during emergencies.", o: ["instructions", "songs", "stories", "games"], a: "A" },
-        { q: "A landslide involves moving __________ and rocks.", o: ["soil", "water", "food", "clothes"], a: "A" },
-        { q: "The Earth's crust is divided into large pieces called __________..", o: ["stones", "plates", "rivers", "clouds"], a: "B" },
-        { q: "Plate tectonics is the __________ of the Earth's plates.", o: ["colour", "movement", "size", "shape"], a: "B" },
-        { q: "The outer layer of the Earth is called the __________.", o: ["crust", "ocean", "cloud", "sky"], a: "A" },
-        { q: "Which of these is a living thing?", o: ["rock", "water", "goat", "soil"], a: "C" },
-        { q: "Which of these is a non-living thing?", o: ["bird", "fish", "air", "goat"], a: "C" },
-        { q: "A forest ecosystem has many __________.", o: ["roads", "trees", "houses", "cars"], a: "B" },
-        { q: "Weather is the condition of the __________.", o: ["atmosphere", "classroom", "market", "road"], a: "A" },
-        { q: "A day with bright sunshine is called __________ weather.", o: ["rainy", "windy", "sunny", "cloudy"], a: "C" },
-        { q: "The two major seasons in Nigeria are rainy and __________ seasons.", o: ["winter", "dry", "spring", "autumn"], a: "B" }
+        { q: "A cat __________.", o: ["barks", "meows", "roars", "buzzes"], a: "B", section: "Instructions: Answer all questions" },
+        { q: "A lion __________.", o: ["bleats", "roars", "chirps", "quacks"], a: "B" },
+        { q: "A bee __________.", o: ["roars", "buzzes", "moos", "bleats"], a: "B" },
+        { q: "The sun is a source of __________.", o: ["energy", "sand", "food", "paper"], a: "A" },
+        { q: "Electricity powers __________.", o: ["fans", "leaves", "books", "stones"], a: "A" },
+        { q: "Firewood is used for __________.", o: ["cooking", "writing", "reading", "drawing"], a: "A" },
+        { q: "Guitar is a __________ instrument.", o: ["musical", "farming", "cooking", "sports"], a: "A" },
+        { q: "Sound helps us to __________.", o: ["communicate", "sleep only", "hide", "jump"], a: "A" },
+        { q: "A __________ is used to make music.", o: ["drum", "ruler", "desk", "chalk"], a: "A" },
+        { q: "Wind is a __________ source of energy.", o: ["renewable", "non-renewable", "dirty", "weak"], a: "A" },
+        { q: "Petrol is a __________ source of energy.", o: ["renewable", "non-renewable", "natural", "free"], a: "B" },
+        { q: "Water is a __________ source of energy.", o: ["renewable", "harmful", "dirty", "weak"], a: "A" },
+        { q: "Energy is the ability to do __________.", o: ["work", "sleep", "cry", "dance"], a: "A" },
+        { q: "__________ energy helps us to see.", o: ["Sound", "Light", "Heat", "Water"], a: "B" },
+        { q: "Fire gives __________ energy.", o: ["sound", "heat", "water", "wind"], a: "B" },
+        { q: "Clay is a __________ material.", o: ["hard", "soft", "sharp", "dry"], a: "B" },
+        { q: "Water helps clay become __________.", o: ["harder", "softer", "rougher", "smaller"], a: "B" },
+        { q: "One object that can be moulded is __________.", o: ["ball", "car road", "building", "chair"], a: "A" },
+        { q: "A bottle opener is used to __________.", o: ["drink", "open bottles", "cook", "wash"], a: "B" },
+        { q: "A wheel helps in __________.", o: ["sleeping", "movement", "eating", "writing"], a: "B" },
+        { q: "Rope can be used to __________ water.", o: ["drink", "draw", "wash", "cook"], a: "B" },
+        { q: "Feeding means __________.", o: ["sleeping", "eating", "running", "jumping"], a: "B" },
+        { q: "Animals need food to __________.", o: ["sleep", "grow", "cry", "hide"], a: "B" },
+        { q: "Herbivores eat __________.", o: ["meat", "plants", "stones", "sand"], a: "B" },
+        { q: "Firewood can be used for __________.", o: ["cooking", "sleeping", "dancing", "reading"], a: "A" },
+        { q: "Vehicles use __________.", o: ["petrol", "chalk", "paper", "sand"], a: "A" },
+        { q: "Kerosene is a __________ source of energy.", o: ["renewable", "non-renewable", "natural", "water"], a: "B" },
+        { q: "Heat energy gives us __________.", o: ["cold", "heat", "rain", "food"], a: "B" },
+        { q: "Light energy helps us to __________.", o: ["see", "sleep", "eat", "dance"], a: "A" },
+        { q: "Plants need __________ to grow.", o: ["darkness", "sunlight", "stones", "books"], a: "B" }
     ];
 
     let countdownTracker;
-    let timeRemainingSeconds = 30 * 60; // 30 Minutes allocation
+    let timeRemainingSeconds = 30 * 60; // 30 Minutes Duration
     const lettersMap = ["A", "B", "C", "D"];
 
     function startAssessment() {
         const inputName = document.getElementById('candidate-fullname').value.trim();
         if (inputName === "") {
-            alert("Access Denied: Please fill in the candidate's complete name setup.");
+            alert("Access Denied: Please fill in your name before starting the exam.");
             return;
         }
 
-        // Display Toggle
+        // Structural View Initialization
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('quiz-screen').style.display = 'block';
         document.getElementById('timer-banner').style.display = 'block';
@@ -317,6 +331,14 @@
 
         questionsDatabase.forEach((questionItem, qIndex) => {
             const displayIndex = qIndex + 1;
+
+            if (questionItem.section) {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'section-header';
+                sectionDiv.innerText = questionItem.section;
+                targetContainer.appendChild(sectionDiv);
+            }
+
             const block = document.createElement('div');
             block.className = 'card question-box';
 
@@ -326,7 +348,7 @@
                 structuralOptionsMarkup += `
                     <label class="option-node" id="node-box-${displayIndex}-${currentLetter}">
                         <input type="radio" name="question-id-${displayIndex}" value="${currentLetter}">
-                        <span><strong>${currentLetter}.</strong> ${optionValue}</span>
+                        <span><strong>${currentLetter.toLowerCase()}.</strong> ${optionValue}</span>
                     </label>
                 `;
             });
@@ -353,7 +375,7 @@
 
             if (timeRemainingSeconds <= 0) {
                 clearInterval(countdownTracker);
-                alert("Time Limit Expired! Running automated system submission configuration.");
+                alert("Time Limit Expired! The system will now automatically grade your exam.");
                 gradeAssessment();
             }
         }, 1000);
@@ -373,7 +395,7 @@
             const checkedLetter = checkedRadio ? checkedRadio.value : null;
             const targetCorrectLetter = questionItem.a;
 
-            // Freeze UI inputs
+            // Lock inputs from further change
             const choicesElements = document.querySelectorAll(`input[name="question-id-${displayIndex}"]`);
             choicesElements.forEach(input => input.disabled = true);
 
@@ -386,11 +408,11 @@
                 }
                 document.getElementById(`node-box-${displayIndex}-${targetCorrectLetter}`).classList.add('correct-state');
                 
-                // Expose corrective text instruction line underneath
+                // Render custom context corrections matching choice indices
                 const solutionIndex = lettersMap.indexOf(targetCorrectLetter);
                 const explicitSolutionString = questionItem.o[solutionIndex];
                 const notificationDiv = document.getElementById(`feedback-id-${displayIndex}`);
-                notificationDiv.innerText = `Correction: The correct answer is ${targetCorrectLetter} (${explicitSolutionString})`;
+                notificationDiv.innerHTML = `Correction: The correct answer is <strong>${targetCorrectLetter.toLowerCase()}</strong> (${explicitSolutionString})`;
                 notificationDiv.style.display = "block";
             }
         });
