@@ -61,7 +61,7 @@
             
             <div class="p-10">
                 <div class="text-center mb-8">
-                    <p class="text-xl font-semibold text-gray-800">Key Stage 1 (Year 2)</p>
+                    <p class="text-xl font-semibold text-gray-800">Key Stage 1 (Year 1)</p>
                     <p class="text-2xl font-bold text-indigo-700 mt-1">SOCIAL AND CITIZENSHIP STUDIES</p>
                     <div class="flex justify-center gap-8 mt-6 text-sm">
                         <div>
@@ -101,7 +101,7 @@
             <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
                 <div class="flex items-center gap-4">
                     <div class="bg-blue-100 text-blue-700 px-4 py-2 rounded-xl font-medium text-sm">SOCIAL &amp; CITIZENSHIP STUDIES</div>
-                    <div class="text-gray-500 text-sm">Year 2 • Term 3</div>
+                    <div class="text-gray-500 text-sm">Year 1 • Term 3</div>
                 </div>
                 
                 <div class="flex items-center gap-6">
@@ -190,341 +190,71 @@
     </div>
 
     <script>
-        // Correct answers
+        // Correct answers for Year 1
         const correctAnswers = {
             1: 'b',
-            2: 'a',
-            3: 'c',
+            2: 'b',
+            3: 'a',
             4: 'b',
-            5: 'a',
-            6: 'a',
+            5: 'b',
+            6: 'b',
             7: 'a',
             8: 'a',
-            9: 'b',
-            10: 'a',
+            9: 'a',
+            10: 'b',
             11: 'a',
-            12: 'b',
-            13: 'b',
-            14: 'c',
+            12: 'a',
+            13: 'c',
+            14: 'b',
             15: 'c',
-            16: 'b',
+            16: 'c',
             17: 'b',
             18: 'b',
             19: 'b',
             20: 'c',
             21: 'c',
             22: 'c',
-            23: 'c',
+            23: 'b',
             24: 'b',
             25: 'b',
             26: 'b',
-            27: 'a',
+            27: 'b',
             28: 'b',
-            29: 'b',
+            29: 'c',
             30: 'b'
         };
 
         const questions = [
-            {
-                num: 1,
-                text: "Road Safety officers help to control __________.",
-                options: {
-                    a: "games",
-                    b: "traffic",
-                    c: "food",
-                    d: "farms"
-                }
-            },
-            {
-                num: 2,
-                text: "Civil Defence helps to protect __________ property.",
-                options: {
-                    a: "public",
-                    b: "private",
-                    c: "old",
-                    d: "broken"
-                }
-            },
-            {
-                num: 3,
-                text: "We should avoid __________.",
-                options: {
-                    a: "friends",
-                    b: "teachers",
-                    c: "strangers",
-                    d: "parents"
-                }
-            },
-            {
-                num: 4,
-                text: "Broken electrical wires can cause __________.",
-                options: {
-                    a: "safety",
-                    b: "danger",
-                    c: "happiness",
-                    d: "games"
-                }
-            },
-            {
-                num: 5,
-                text: "One source of insecurity is __________.",
-                options: {
-                    a: "flooding",
-                    b: "reading",
-                    c: "singing",
-                    d: "writing"
-                }
-            },
-            {
-                num: 6,
-                text: "We should report suspicious activities to __________.",
-                options: {
-                    a: "adults",
-                    b: "strangers",
-                    c: "visitors",
-                    d: "nobody"
-                }
-            },
-            {
-                num: 7,
-                text: "We use water for __________ food.",
-                options: {
-                    a: "cooking",
-                    b: "drawing",
-                    c: "hiding",
-                    d: "throwing"
-                }
-            },
-            {
-                num: 8,
-                text: "Clean water helps us stay __________.",
-                options: {
-                    a: "healthy",
-                    b: "dirty",
-                    c: "weak",
-                    d: "hungry"
-                }
-            },
-            {
-                num: 9,
-                text: "Passing water through cloth is called __________.",
-                options: {
-                    a: "boiling",
-                    b: "filtering",
-                    c: "washing",
-                    d: "stirring"
-                }
-            },
-            {
-                num: 10,
-                text: "Water helps plants to __________.",
-                options: {
-                    a: "grow",
-                    b: "sleep",
-                    c: "hide",
-                    d: "jump"
-                }
-            },
-            {
-                num: 11,
-                text: "A __________ is a source of water.",
-                options: {
-                    a: "stream",
-                    b: "table",
-                    c: "ruler",
-                    d: "shoe"
-                }
-            },
-            {
-                num: 12,
-                text: "Water helps us stay __________.",
-                options: {
-                    a: "weak",
-                    b: "healthy",
-                    c: "dirty",
-                    d: "hungry"
-                }
-            },
-            {
-                num: 13,
-                text: "Drugs should be taken only when prescribed by a __________.",
-                options: {
-                    a: "friend",
-                    b: "doctor",
-                    c: "child",
-                    d: "driver"
-                }
-            },
-            {
-                num: 14,
-                text: "Sour or spoiled food is __________.",
-                options: {
-                    a: "good",
-                    b: "safe",
-                    c: "harmful",
-                    d: "clean"
-                }
-            },
-            {
-                num: 15,
-                text: "We should not pick food from the __________.",
-                options: {
-                    a: "table",
-                    b: "plate",
-                    c: "floor",
-                    d: "pot"
-                }
-            },
-            {
-                num: 16,
-                text: "Smoking cigarette affects the __________.",
-                options: {
-                    a: "legs",
-                    b: "lungs",
-                    c: "hands",
-                    d: "head"
-                }
-            },
-            {
-                num: 17,
-                text: "Too much alcohol can cause __________.",
-                options: {
-                    a: "joy",
-                    b: "accident",
-                    c: "play",
-                    d: "sleep"
-                }
-            },
-            {
-                num: 18,
-                text: "We should drink __________ water.",
-                options: {
-                    a: "dirty",
-                    b: "clean",
-                    c: "bad",
-                    d: "hot"
-                }
-            },
-            {
-                num: 19,
-                text: "Drugs should be taken with advice from a __________.",
-                options: {
-                    a: "friend",
-                    b: "doctor",
-                    c: "child",
-                    d: "teacher"
-                }
-            },
-            {
-                num: 20,
-                text: "We should not buy drugs from __________ sellers.",
-                options: {
-                    a: "registered",
-                    b: "clean",
-                    c: "unregistered",
-                    d: "good"
-                }
-            },
-            {
-                num: 21,
-                text: "We should avoid __________ friends.",
-                options: {
-                    a: "good",
-                    b: "kind",
-                    c: "bad",
-                    d: "happy"
-                }
-            },
-            {
-                num: 22,
-                text: "Addiction means __________.",
-                options: {
-                    a: "stopping drugs",
-                    b: "not taking drugs",
-                    c: "cannot stop taking drugs",
-                    d: "eating food"
-                }
-            },
-            {
-                num: 23,
-                text: "Drug abuse can make a pupil __________ school.",
-                options: {
-                    a: "love",
-                    b: "enjoy",
-                    c: "drop out of",
-                    d: "attend"
-                }
-            },
-            {
-                num: 24,
-                text: "We should take drugs only when __________.",
-                options: {
-                    a: "playing",
-                    b: "told by doctor",
-                    c: "running",
-                    d: "eating"
-                }
-            },
-            {
-                num: 25,
-                text: "Bad food can make us __________.",
-                options: {
-                    a: "strong",
-                    b: "sick",
-                    c: "tall",
-                    d: "happy"
-                }
-            },
-            {
-                num: 26,
-                text: "Adding wrong things to food is called __________.",
-                options: {
-                    a: "mixing",
-                    b: "adulteration",
-                    c: "cooking",
-                    d: "cleaning"
-                }
-            },
-            {
-                num: 27,
-                text: "Changing food and selling it as original is __________.",
-                options: {
-                    a: "fraud",
-                    b: "play",
-                    c: "cooking",
-                    d: "farming"
-                }
-            },
-            {
-                num: 28,
-                text: "Food safety means __________.",
-                options: {
-                    a: "playing",
-                    b: "eating safe food",
-                    c: "sleeping",
-                    d: "running"
-                }
-            },
-            {
-                num: 29,
-                text: "Food that is mixed with wrong things is called __________.",
-                options: {
-                    a: "clean food",
-                    b: "adulterated food",
-                    c: "fresh food",
-                    d: "good food"
-                }
-            },
-            {
-                num: 30,
-                text: "Food with bad smell is __________.",
-                options: {
-                    a: "good",
-                    b: "bad",
-                    c: "fresh",
-                    d: "clean"
-                }
-            }
+            { num: 1, text: "Security agencies help to protect __________ and property.", options: { a: "books", b: "lives", c: "clothes", d: "toys" } },
+            { num: 2, text: "The __________ arrest criminals.", options: { a: "teachers", b: "police", c: "farmers", d: "traders" } },
+            { num: 3, text: "Soldiers belong to the __________. ", options: { a: "army", b: "school", c: "hospital", d: "market" } },
+            { num: 4, text: "We should __________ dangerous places.", options: { a: "visit", b: "avoid", c: "build", d: "draw" } },
+            { num: 5, text: "Fire outbreak is a source of __________. ", options: { a: "safety", b: "insecurity", c: "comfort", d: "fun" } },
+            { num: 6, text: "Kidnappers are a source of __________. ", options: { a: "peace", b: "insecurity", c: "joy", d: "learning" } },
+            { num: 7, text: "Boiling water helps to kill __________. ", options: { a: "germs", b: "toys", c: "books", d: "pencils" } },
+            { num: 8, text: "Filtering removes __________ from water.", options: { a: "dirt", b: "clothes", c: "food", d: "shoes" } },
+            { num: 9, text: "Dirty water can cause __________. ", options: { a: "sickness", b: "happiness", c: "dancing", d: "laughter" } },
+            { num: 10, text: "Borehole is a source of __________. ", options: { a: "sand", b: "water", c: "food", d: "light" } },
+            { num: 11, text: "We use water for __________. ", options: { a: "cooking", b: "shouting", c: "dancing", d: "drawing" } },
+            { num: 12, text: "Good water should be free from __________. ", options: { a: "germs", b: "books", c: "toys", d: "pencils" } },
+            { num: 13, text: "We should avoid __________ food.", options: { a: "clean", b: "fresh", c: "expired", d: "good" } },
+            { num: 14, text: "Poorly cooked food is __________. ", options: { a: "safe", b: "harmful", c: "clean", d: "sweet" } },
+            { num: 15, text: "We should not eat __________ fruits.", options: { a: "ripe", b: "sweet", c: "unripe", d: "fresh" } },
+            { num: 16, text: "Rotten food is __________. ", options: { a: "clean", b: "fresh", c: "harmful", d: "sweet" } },
+            { num: 17, text: "Dirty water can cause __________. ", options: { a: "strength", b: "sickness", c: "joy", d: "play" } },
+            { num: 18, text: "Unripe fruits can cause __________. ", options: { a: "happiness", b: "stomach ache", c: "sleep", d: "running" } },
+            { num: 19, text: "Self-medication means taking drugs __________. ", options: { a: "with doctor", b: "without doctor", c: "in hospital", d: "with nurse" } },
+            { num: 20, text: "Avoiding drug abuse helps us to stay __________. ", options: { a: "sick", b: "weak", c: "healthy", d: "tired" } },
+            { num: 21, text: "Drug abuse is __________. ", options: { a: "good", b: "safe", c: "harmful", d: "useful" } },
+            { num: 22, text: "Buying drugs from roadside is __________. ", options: { a: "safe", b: "correct", c: "dangerous", d: "clean" } },
+            { num: 23, text: "Drug abuse can cause __________. ", options: { a: "happiness", b: "illness", c: "strength", d: "growth" } },
+            { num: 24, text: "Taking too much drugs can lead to __________. ", options: { a: "health", b: "death", c: "play", d: "fun" } },
+            { num: 25, text: "Chemicals used on crops can be __________. ", options: { a: "safe", b: "harmful", c: "sweet", d: "soft" } },
+            { num: 26, text: "Poor storage can make food __________. ", options: { a: "fresh", b: "spoil", c: "grow", d: "clean" } },
+            { num: 27, text: "Dirty environment can make food __________. ", options: { a: "safe", b: "bad", c: "fresh", d: "strong" } },
+            { num: 28, text: "Food exposed to flies is __________. ", options: { a: "clean", b: "contaminated", c: "fresh", d: "sweet" } },
+            { num: 29, text: "Food without label is __________. ", options: { a: "safe", b: "fresh", c: "unsafe", d: "sweet" } },
+            { num: 30, text: "Food that has passed expiry date is __________. ", options: { a: "fresh", b: "expired", c: "clean", d: "good" } }
         ];
 
         let studentName = "";
@@ -544,7 +274,7 @@
             document.getElementById('examScreen').classList.remove('hidden');
             
             document.getElementById('studentInfo').innerHTML = `
-                <span class="font-semibold">${studentName}</span> • Year 2 Social &amp; Citizenship Studies
+                <span class="font-semibold">${studentName}</span> • Year 1 Social &amp; Citizenship Studies
             `;
 
             renderQuestions();
@@ -578,7 +308,7 @@
             const container = document.getElementById('questionsContainer');
             container.innerHTML = '';
 
-            questions.forEach((q, index) => {
+            questions.forEach((q) => {
                 const questionHTML = `
                     <div class="question-card bg-white border border-gray-200 rounded-3xl p-8">
                         <div class="flex gap-4">
@@ -607,7 +337,6 @@
         function selectOption(questionNum, option) {
             selectedAnswers[questionNum] = option;
             
-            // Update UI to show selected
             const optionsContainer = document.getElementById(`options-${questionNum}`);
             const labels = optionsContainer.querySelectorAll('label');
             
@@ -627,7 +356,6 @@
             
             clearInterval(timerInterval);
             
-            // Calculate score
             let score = 0;
             let reviewHTML = '';
             
@@ -666,7 +394,6 @@
             
             const percentage = Math.round((score / questions.length) * 100);
             
-            // Show results
             document.getElementById('examScreen').classList.add('hidden');
             document.getElementById('resultsScreen').classList.remove('hidden');
             
@@ -676,31 +403,23 @@
             document.getElementById('correctCount').textContent = score;
             document.getElementById('wrongCount').textContent = questions.length - score;
             
-            // Color the score circle
             const scoreCircle = document.getElementById('scoreCircle');
-            if (percentage >= 80) {
-                scoreCircle.style.borderColor = '#10b981';
-            } else if (percentage >= 60) {
-                scoreCircle.style.borderColor = '#eab308';
-            } else {
-                scoreCircle.style.borderColor = '#ef4444';
-            }
+            if (percentage >= 80) scoreCircle.style.borderColor = '#10b981';
+            else if (percentage >= 60) scoreCircle.style.borderColor = '#eab308';
+            else scoreCircle.style.borderColor = '#ef4444';
             
             document.getElementById('reviewContainer').innerHTML = reviewHTML;
         }
 
         function restartExam() {
-            // Reset everything
             window.location.reload();
         }
 
-        // Allow Enter key on name input
+        // Keyboard support
         document.addEventListener('DOMContentLoaded', () => {
             const nameInput = document.getElementById('studentName');
             nameInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    startExam();
-                }
+                if (e.key === 'Enter') startExam();
             });
         });
     </script>
